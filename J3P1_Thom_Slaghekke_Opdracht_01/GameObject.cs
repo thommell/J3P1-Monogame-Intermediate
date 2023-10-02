@@ -1,3 +1,4 @@
+using System.Windows.Forms;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 
@@ -20,7 +21,6 @@ public class GameObject
     {
         
     }
-
     public virtual void UpdateObject(GameTime pGameTime)
     {
         

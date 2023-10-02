@@ -18,6 +18,6 @@ public class Interactable : GameObject
 
     private void CollisionCheck()
     {
-        if (_rectangle.Intersects(_player._rec))
+        
     }
 }
