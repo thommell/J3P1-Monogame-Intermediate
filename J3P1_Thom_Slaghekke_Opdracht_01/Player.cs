@@ -21,8 +21,8 @@ public class Player : GameObject
 
     private void ClampPlayer(GameTime pGameTime, Viewport pViewport)
     {
-        _position = new Vector2(Math.Clamp(_position.X, 0, pViewport.Width),
-        Math.Clamp(_position.Y, 0, pViewport.Height));
+        _position = new Vector2(Math.Clamp(_position.X, 0, pViewport.Width - _texture.Width),
+        Math.Clamp(_position.Y, 0, pViewport.Height - _texture.Height));
         // todo: clampt alleen nog maar links en de bovenkant... kan dit door de origin komen?
     }
     private void PlayerMovement(GameTime pGameTime)
