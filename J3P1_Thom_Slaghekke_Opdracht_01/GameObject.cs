@@ -8,18 +8,13 @@ public class GameObject
 {
     protected Vector2 _position;
     public Texture2D _texture;
-    protected Rectangle _rectangle;
+    public Rectangle _rectangle;
 
     protected GameObject(Vector2 pPosition, Texture2D pTexture, Rectangle pRectangle)
     {
         _position = pPosition;
         _texture = pTexture;
         _rectangle = pRectangle;
-    }
-
-    public virtual void UpdateObject()
-    {
-        
     }
     public virtual void UpdateObject(GameTime pGameTime)
     {

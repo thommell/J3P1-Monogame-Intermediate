@@ -1,4 +1,4 @@
-﻿using System.Windows.Forms;
+﻿using System.Collections.Generic;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
@@ -13,6 +13,12 @@ public class Game1 : Game
     private SpriteBatch _sb;
 
     private Player _player;
+    public Interactable _shieldObject;
+    public Interactable _weaponObject;
+    private Game1 _game;
+
+
+    public List<GameObject> _gameObjects = new List<GameObject>();
     private Viewport _viewport;
 
 
@@ -29,7 +35,6 @@ public class Game1 : Game
         System.Console.WriteLine("Initialize");
 
         _viewport = new Viewport(0, 0, GraphicsDevice.Viewport.Width, GraphicsDevice.Viewport.Height);
-        Rectangle playerRect = new Rectangle();
 
         base.Initialize();
     }
@@ -38,8 +43,25 @@ public class Game1 : Game
     {
         //System.Console.WriteLine("LoadContent");
         _sb = new SpriteBatch(GraphicsDevice);
-        Texture2D playerTexture = Content.Load<Texture2D>("Knight");
-        _player = new Player(new Vector2(100, 100), playerTexture, new Rectangle(0,0,0,0), _viewport);
+
+        // Player Textures
+        Texture2D[] playerTextures = {
+                Content.Load<Texture2D>("Knight"), // 0
+                Content.Load<Texture2D>("KnightShield"), // 1
+                Content.Load<Texture2D>("KnightWeapon"), // 2
+                Content.Load<Texture2D>("KnightWeaponShield") // 3
+        };
+        // Interactable Textures
+        Texture2D weaponTexture = Content.Load<Texture2D>("Weapon");
+        Texture2D shieldTexture = Content.Load<Texture2D>("Shield");
+        _game = this;
+        _player = new Player(new Vector2(100, 100), playerTextures[0], new Rectangle(0,0,0,0), _viewport, playerTextures, _game);
+        _shieldObject = new Interactable(new Vector2(200, 200), shieldTexture, new Rectangle(0, 0, 0, 0), "shield", _player, _game);
+        _weaponObject = new Interactable(new Vector2(200, 400), weaponTexture, new Rectangle(0, 0, 0, 0), "weapon", _player, _game);
+        
+        _gameObjects.Add(_player);
+        _gameObjects.Add(_shieldObject);
+        _gameObjects.Add(_weaponObject);
         // TODO: use this.Content to load your game content here
     }
 
@@ -50,8 +72,12 @@ public class Game1 : Game
             Keyboard.GetState().IsKeyDown(Keys.Escape))
             Exit();
 
-        _player.UpdateObject(gameTime);
-        
+       // System.Console.WriteLine(_gameObjects.Count);
+        for (int i = 0; i < _gameObjects.Count; i++)
+        {
+            _gameObjects[i].UpdateObject(gameTime);
+        }
+
         // TODO: Add your update logic here
     }
 
@@ -61,9 +87,12 @@ public class Game1 : Game
 
         // TODO: Add your drawing code here
         _sb.Begin();
-        
-        _player.DrawObject(_sb);
-        
+
+        for (int i = 0; i < _gameObjects.Count; i++)
+        {
+            _gameObjects[i].DrawObject(_sb);
+        }
+
         _sb.End();
 
         base.Draw(gameTime);
