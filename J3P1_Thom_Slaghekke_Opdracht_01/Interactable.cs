@@ -17,7 +17,6 @@ public class Interactable : GameObject
         _name = pObjectName;
         _game1 = pGame;
     }
-
     public override void UpdateObject(GameTime pGameTime)
     {
         CollisionCheck();
@@ -32,21 +31,4 @@ public class Interactable : GameObject
             _game1._gameObjects.Remove(this);
         }
     }
-
-    //protected virtual void OnCollision(string pObjectName)
-    //{
-
-    //}
 }
-
-//public class Weapon : Interactable
-//{
-//    public Weapon(Vector2 pPosition, Texture2D pTexture, Rectangle pRectangle, Player pPlayer) : base(pPosition, pTexture, pRectangle, pPlayer)
-//    {
-//    }
-
-//    protected override void OnCollision()
-//    {
-//        _player.CollidedWithWeapon();
-//    }
-//}

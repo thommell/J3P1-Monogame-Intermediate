@@ -7,7 +7,7 @@ namespace J3P1_Thom_Slaghekke_Opdracht_01;
 public class GameObject
 {
     protected Vector2 _position;
-    public Texture2D _texture;
+    protected Texture2D _texture;
     public Rectangle _rectangle;
 
     protected GameObject(Vector2 pPosition, Texture2D pTexture, Rectangle pRectangle)

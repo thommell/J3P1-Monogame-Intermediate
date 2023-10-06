@@ -15,8 +15,8 @@ public class Game1 : Game
     private Player _player;
     public Interactable _shieldObject;
     public Interactable _weaponObject;
+    public Interactable _gateObject;
     private Game1 _game;
-
 
     public List<GameObject> _gameObjects = new List<GameObject>();
     private Viewport _viewport;
@@ -52,16 +52,19 @@ public class Game1 : Game
                 Content.Load<Texture2D>("KnightWeaponShield") // 3
         };
         // Interactable Textures
-        Texture2D weaponTexture = Content.Load<Texture2D>("Weapon");
-        Texture2D shieldTexture = Content.Load<Texture2D>("Shield");
+        Texture2D _weaponTexture = Content.Load<Texture2D>("Weapon");
+        Texture2D _shieldTexture = Content.Load<Texture2D>("Shield");
+        Texture2D _gateTexture = Content.Load<Texture2D>("Gate");
         _game = this;
         _player = new Player(new Vector2(100, 100), playerTextures[0], new Rectangle(0,0,0,0), _viewport, playerTextures, _game);
-        _shieldObject = new Interactable(new Vector2(200, 200), shieldTexture, new Rectangle(0, 0, 0, 0), "shield", _player, _game);
-        _weaponObject = new Interactable(new Vector2(200, 400), weaponTexture, new Rectangle(0, 0, 0, 0), "weapon", _player, _game);
+        _shieldObject = new Interactable(new Vector2(200, 200), _shieldTexture, new Rectangle(0, 0, 0, 0), "shield", _player, _game);
+        _weaponObject = new Interactable(new Vector2(200, 400), _weaponTexture, new Rectangle(0, 0, 0, 0), "weapon", _player, _game);
+        _gateObject = new Interactable(new Vector2(400, 200), _gateTexture, new Rectangle(0, 0, 0, 0), "gate", _player, _game); 
         
         _gameObjects.Add(_player);
         _gameObjects.Add(_shieldObject);
         _gameObjects.Add(_weaponObject);
+        _gameObjects.Add(_gateObject);
         // TODO: use this.Content to load your game content here
     }
 
@@ -77,7 +80,7 @@ public class Game1 : Game
         {
             _gameObjects[i].UpdateObject(gameTime);
         }
-
+        
         // TODO: Add your update logic here
     }
 

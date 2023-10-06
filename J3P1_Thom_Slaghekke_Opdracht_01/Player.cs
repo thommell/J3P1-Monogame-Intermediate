@@ -12,7 +12,7 @@ namespace J3P1_Thom_Slaghekke_Opdracht_01;
 public enum PlayerItems
 {
     Normal,
-    Sword,
+    Weapon,
     Shield,
     SwordAndShield
 }
@@ -35,6 +35,7 @@ public class Player : GameObject
         ClampPlayer(pGameTime, _viewPort);
         UpdateTexture();
         UpdateRect();
+        Console.WriteLine(_items);
     }
 
     private void ClampPlayer(GameTime pGameTime, Viewport pViewport)
@@ -52,7 +53,7 @@ public class Player : GameObject
             case PlayerItems.Shield:
                 _texture = _playerTextures[1];
                 break;
-            case PlayerItems.Sword:
+            case PlayerItems.Weapon:
                 _texture = _playerTextures[2];
                 break;
             case PlayerItems.SwordAndShield:
@@ -96,20 +97,20 @@ public class Player : GameObject
     }
     public void CollidedWith(string pObjectName)
     {
-        if (pObjectName == "shield")
+        if (pObjectName == "shield" && _items == PlayerItems.Normal)
         {
             Console.WriteLine(_game1._gameObjects.Count);
             _items = PlayerItems.Shield;
         }
-        else if (pObjectName == "sword")
+        else if (pObjectName == "weapon" && _items == PlayerItems.Normal)
         {
-            _items = PlayerItems.Sword;
+            _items = PlayerItems.Weapon;
         }
-        else if (pObjectName == "swordAndShield" && _items == PlayerItems.Sword)
+        else if (pObjectName == "gate")
         {
-            _items = PlayerItems.SwordAndShield;
+            _game1.Exit();
         }
-        else if (pObjectName == "swordAndShield" && _items == PlayerItems.Shield)
+        else
         {
             _items = PlayerItems.SwordAndShield;
         }
