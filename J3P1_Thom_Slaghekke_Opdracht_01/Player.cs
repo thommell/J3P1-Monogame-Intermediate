@@ -5,10 +5,6 @@ using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
 
 namespace J3P1_Thom_Slaghekke_Opdracht_01;
-
-
-
-
 public enum PlayerItems
 {
     Normal,
@@ -33,7 +29,7 @@ public class Player : GameObject
     {
         PlayerMovement(pGameTime);
         ClampPlayer(pGameTime, _viewPort);
-        UpdateTexture();
+        //UpdateTexture();
         UpdateRect();
         Console.WriteLine(_items);
     }
@@ -101,7 +97,7 @@ public class Player : GameObject
         {
             Console.WriteLine(_game1._gameObjects.Count);
             _items = PlayerItems.Shield;
-        }
+        } 
         else if (pObjectName == "weapon" && _items == PlayerItems.Normal)
         {
             _items = PlayerItems.Weapon;
@@ -114,6 +110,8 @@ public class Player : GameObject
         {
             _items = PlayerItems.SwordAndShield;
         }
+
+        UpdateTexture();
     }
 
 }
