@@ -1,3 +1,3 @@
-﻿using var game = new J3P1_Thom_Slaghekke_Opdracht_01.Game1();
+﻿using var game = new J3P1_CSharp_Advanced.Opdracht02.Game1();
 
 game.Run();
