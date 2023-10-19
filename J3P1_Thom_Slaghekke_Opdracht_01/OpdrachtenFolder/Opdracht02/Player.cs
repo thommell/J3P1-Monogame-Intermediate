@@ -4,7 +4,7 @@ using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
 
-namespace J3P1_Thom_Slaghekke_Opdracht_01;
+namespace J3P1_CSharp_Advanced.OpdrachtenFolder.Opdracht02;
 public enum PlayerItems
 {
     Normal,
@@ -17,7 +17,7 @@ public class Player : GameObject
     private Game1 _game1;
     private readonly float _speed = 350f;
     private readonly Viewport _viewPort;
-    protected PlayerItems _items = PlayerItems.Normal;
+    private PlayerItems _items = PlayerItems.Normal;
     private Texture2D[] _playerTextures;
     public Player(Vector2 pPosition, Texture2D pTexture, Rectangle pRectangle, Viewport pViewPort, Texture2D[] pPlayerTextures, Game1 pGame) : base(pPosition, pTexture, pRectangle)
     {
@@ -29,11 +29,8 @@ public class Player : GameObject
     {
         PlayerMovement(pGameTime);
         ClampPlayer(pGameTime, _viewPort);
-        //UpdateTexture();
         UpdateRect();
-        Console.WriteLine(_items);
     }
-
     private void ClampPlayer(GameTime pGameTime, Viewport pViewport)
     {
         _position = new Vector2(Math.Clamp(_position.X, 0, pViewport.Width - _texture.Width),
@@ -68,7 +65,7 @@ public class Player : GameObject
     {
         KeyboardState keyboardState = Keyboard.GetState();
         Vector2 translation = Vector2.Zero;
-        
+
         if (keyboardState.IsKeyDown(Keys.W))
         {
             translation.Y -= _speed;
@@ -95,22 +92,22 @@ public class Player : GameObject
     {
         if (pObjectName == "shield" && _items == PlayerItems.Normal)
         {
-            Console.WriteLine(_game1._gameObjects.Count);
+            Console.WriteLine(_game1._gameObjectsMenu.Count);
             _items = PlayerItems.Shield;
-        } 
+        }
         else if (pObjectName == "weapon" && _items == PlayerItems.Normal)
         {
             _items = PlayerItems.Weapon;
         }
         else if (pObjectName == "gate")
         {
-            _game1.Exit();
+            
         }
         else
         {
             _items = PlayerItems.SwordAndShield;
         }
-
+        Console.WriteLine(_items);
         UpdateTexture();
     }
 

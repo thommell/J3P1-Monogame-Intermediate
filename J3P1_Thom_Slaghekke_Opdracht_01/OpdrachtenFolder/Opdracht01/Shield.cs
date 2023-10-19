@@ -7,7 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace J3P1_Thom_Slaghekke_Opdracht_01
+namespace J3P1_CSharp_Advanced.OpdrachtenFolder.Opdracht01
 {
     public class Shield : Interactable
     {

@@ -5,7 +5,7 @@ using Microsoft.Xna.Framework.Input;
 using ButtonState = Microsoft.Xna.Framework.Input.ButtonState;
 using Keys = Microsoft.Xna.Framework.Input.Keys;
 
-namespace J3P1_CSharp_Advanced.Opdracht02;
+namespace J3P1_CSharp_Advanced.OpdrachtenFolder.Opdracht01;
 
 public class Game1 : Game
 {
@@ -67,17 +67,20 @@ public class Game1 : Game
         _gameObjects.Add(_gateObject);
         // TODO: use this.Content to load your game content here
     }
+
     protected override void Update(GameTime gameTime)
     {
         //System.Console.WriteLine("Update");
         if (GamePad.GetState(PlayerIndex.One).Buttons.Back == ButtonState.Pressed ||
             Keyboard.GetState().IsKeyDown(Keys.Escape))
             Exit();
+
         // System.Console.WriteLine(_gameObjects.Count);
         for (int i = 0; i < _gameObjects.Count; i++)
         {
             _gameObjects[i].UpdateObject(gameTime);
         }
+
         // TODO: Add your update logic here
     }
 

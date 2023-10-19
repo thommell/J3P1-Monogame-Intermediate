@@ -4,7 +4,7 @@ using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
 
-namespace J3P1_CSharp_Advanced.Opdracht02;
+namespace J3P1_CSharp_Advanced.OpdrachtenFolder.Opdracht01;
 public enum PlayerItems
 {
     Normal,
@@ -68,7 +68,7 @@ public class Player : GameObject
     {
         KeyboardState keyboardState = Keyboard.GetState();
         Vector2 translation = Vector2.Zero;
-
+        
         if (keyboardState.IsKeyDown(Keys.W))
         {
             translation.Y -= _speed;
@@ -97,7 +97,7 @@ public class Player : GameObject
         {
             Console.WriteLine(_game1._gameObjects.Count);
             _items = PlayerItems.Shield;
-        }
+        } 
         else if (pObjectName == "weapon" && _items == PlayerItems.Normal)
         {
             _items = PlayerItems.Weapon;

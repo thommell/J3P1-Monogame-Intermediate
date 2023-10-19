@@ -2,7 +2,7 @@ using System.Windows.Forms;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 
-namespace J3P1_Thom_Slaghekke_Opdracht_01;
+namespace J3P1_CSharp_Advanced.OpdrachtenFolder.Opdracht02;
 
 public class GameObject
 {
@@ -18,7 +18,7 @@ public class GameObject
     }
     public virtual void UpdateObject(GameTime pGameTime)
     {
-        
+
     }
     public virtual void DrawObject(SpriteBatch pSpriteBatch)
     {

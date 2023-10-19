@@ -2,7 +2,7 @@ using System;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 
-namespace J3P1_CSharp_Advanced.Opdracht02;
+namespace J3P1_CSharp_Advanced.OpdrachtenFolder.Opdracht02;
 public class Interactable : GameObject
 {
     private Player _player;
@@ -23,10 +23,12 @@ public class Interactable : GameObject
         _rectangle = new Rectangle((int)_position.X, (int)_position.Y, _texture.Width, _texture.Height);
         if (_player._rectangle.Intersects(_rectangle))
         {
-            Console.WriteLine("Collided with player");
-            Console.WriteLine(_name);
             _player.CollidedWith(_name);
-            _game1._gameObjects.Remove(this);
+            OnCollision();
         }
+    }
+    public virtual void OnCollision()
+    {
+
     }
 }

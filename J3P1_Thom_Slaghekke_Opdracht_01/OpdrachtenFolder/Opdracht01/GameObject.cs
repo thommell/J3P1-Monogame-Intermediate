@@ -2,8 +2,7 @@ using System.Windows.Forms;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 
-namespace J3P1_CSharp_Advanced.Opdracht02;
-
+namespace J3P1_CSharp_Advanced.OpdrachtenFolder.Opdracht01;
 public class GameObject
 {
     protected Vector2 _position;
@@ -18,7 +17,7 @@ public class GameObject
     }
     public virtual void UpdateObject(GameTime pGameTime)
     {
-
+        
     }
     public virtual void DrawObject(SpriteBatch pSpriteBatch)
     {
