@@ -6,8 +6,8 @@ namespace J3P1_CSharp_Advanced.OpdrachtenFolder.Opdracht02;
 
 public class GameObject
 {
-    protected Vector2 _position;
-    protected Texture2D _texture;
+    public Vector2 _position;
+    public Texture2D _texture;
     public Rectangle _rectangle;
 
     protected GameObject(Vector2 pPosition, Texture2D pTexture, Rectangle pRectangle)

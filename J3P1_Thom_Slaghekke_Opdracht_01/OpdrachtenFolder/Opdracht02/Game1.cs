@@ -1,4 +1,6 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
+using System.Xml;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
@@ -16,6 +18,10 @@ public class Game1 : Game
     public Interactable _shieldObject;
     public Interactable _weaponObject;
     public Interactable _gateObject;
+
+    private MouseState _mouseState;
+    private Point _mousePos;
+    private int mouseX, mouseY;
 
     public Button[] buttons = new Button[2];
 
@@ -45,6 +51,7 @@ public class Game1 : Game
         Hovered,
         Pressed
     }
+
     public Game1()
     {
         _graphics = new GraphicsDeviceManager(this);
@@ -99,11 +106,21 @@ public class Game1 : Game
         _gameObjectsLevel1.Add(_shieldObject);
         _gameObjectsLevel1.Add(_weaponObject);
         _gameObjectsLevel1.Add(_gateObject);
-        // TODO: use this.Content to load your game content here
     }
     protected override void Update(GameTime gameTime)
     {
-        //System.Console.WriteLine("Update");
+        buttons[0]._rectangle = new Rectangle((int)buttons[0]._position.X, (int)buttons[0]._position.Y, buttons[0]._texture.Width, buttons[0]._texture.Height);
+
+        // mouse behaviour
+
+        _mouseState = Mouse.GetState();
+        _mousePos = new Point(_mouseState.X, _mouseState.Y);
+
+        if (buttons[0]._rectangle.Contains(_mousePos) && _mouseState.LeftButton == ButtonState.Pressed)
+        {
+            scene = Scenes.Level1;
+        }
+
         if (GamePad.GetState(PlayerIndex.One).Buttons.Back == ButtonState.Pressed ||
             Keyboard.GetState().IsKeyDown(Keys.Escape))
             Exit();
@@ -116,7 +133,7 @@ public class Game1 : Game
             }
             break;
         case Scenes.Level1:
-            for (int i = 0; i < _gameObjectsMenu.Count; i++)
+            for (int i = 0; i < _gameObjectsLevel1.Count; i++)
             {
                 _gameObjectsLevel1[i].UpdateObject(gameTime);
             }
@@ -128,6 +145,10 @@ public class Game1 : Game
             }
             break;
         }
+    }
+    public void ExitGame()
+    {
+        Environment.Exit(0);
     }
 
     protected override void Draw(GameTime gameTime)
@@ -146,19 +167,18 @@ public class Game1 : Game
                 }
                 break;
             case Scenes.Level1:
-                for (int i = 0; i < _gameObjectsMenu.Count; i++)
+                for (int i = 0; i < _gameObjectsLevel1.Count; i++)
                 {
                     _gameObjectsLevel1[i].DrawObject(_sb);
                 }
                 break;
             case Scenes.Level2:
-                for (int i = 0; i < _gameObjectsMenu.Count; i++)
+                for (int i = 0; i < _gameObjectsMenu.Count; i++) // verander count naar level2
                 {
                     //_gameObjectsLevel2.DrawObject(_sb);
                 }
                 break;
         }
-
         _sb.End();
 
         base.Draw(gameTime);

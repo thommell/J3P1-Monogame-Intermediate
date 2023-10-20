@@ -16,16 +16,20 @@ public class Interactable : GameObject
     }
     public override void UpdateObject(GameTime pGameTime)
     {
+        UpdateRect();
         CollisionCheck();
     }
     private void CollisionCheck()
     {
-        _rectangle = new Rectangle((int)_position.X, (int)_position.Y, _texture.Width, _texture.Height);
         if (_player._rectangle.Intersects(_rectangle))
         {
             _player.CollidedWith(_name);
             OnCollision();
         }
+    }
+    private void UpdateRect()
+    {
+        _rectangle = new Rectangle((int)_position.X, (int)_position.Y, _texture.Width, _texture.Height);
     }
     public virtual void OnCollision()
     {

@@ -21,7 +21,7 @@ namespace J3P1_CSharp_Advanced.OpdrachtenFolder.Opdracht02
         {
             // Weapon Collision
             Console.WriteLine("Weapon!");
-            _game._gameObjectsMenu.Remove(this);
+            _game._gameObjectsLevel1.Remove(this);
             
         }
     }

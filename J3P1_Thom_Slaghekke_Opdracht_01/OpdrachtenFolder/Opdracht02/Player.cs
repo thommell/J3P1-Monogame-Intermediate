@@ -90,6 +90,7 @@ public class Player : GameObject
     }
     public void CollidedWith(string pObjectName)
     {
+        
         if (pObjectName == "shield" && _items == PlayerItems.Normal)
         {
             Console.WriteLine(_game1._gameObjectsMenu.Count);
@@ -101,7 +102,7 @@ public class Player : GameObject
         }
         else if (pObjectName == "gate")
         {
-            
+            _game1.ExitGame();
         }
         else
         {

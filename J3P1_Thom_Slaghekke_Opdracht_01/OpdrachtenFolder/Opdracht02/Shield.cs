@@ -22,7 +22,7 @@ namespace J3P1_CSharp_Advanced.OpdrachtenFolder.Opdracht02
         public override void OnCollision()
         {
             // Shield Collision
-            _game._gameObjectsMenu.Remove(this);
+            _game._gameObjectsLevel1.Remove(this);
         }
     }
 }
