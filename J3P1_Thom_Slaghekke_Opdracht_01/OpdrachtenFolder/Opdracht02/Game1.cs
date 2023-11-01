@@ -21,7 +21,6 @@ public class Game1 : Game
 
     private MouseState _mouseState;
     private Point _mousePos;
-    private int mouseX, mouseY;
 
     public Button[] buttons = new Button[2];
 
@@ -38,7 +37,6 @@ public class Game1 : Game
 
     private Scenes scene = Scenes.Menu;
     private ButtonStates buttonState = ButtonStates.Normal;
-
     public enum Scenes
     {
         Menu,
@@ -51,7 +49,6 @@ public class Game1 : Game
         Hovered,
         Pressed
     }
-
     public Game1()
     {
         _graphics = new GraphicsDeviceManager(this);
@@ -65,7 +62,6 @@ public class Game1 : Game
         _viewport = new Viewport(0, 0, GraphicsDevice.Viewport.Width, GraphicsDevice.Viewport.Height);
         base.Initialize();
     }
-
     protected override void LoadContent()
     {
         //System.Console.WriteLine("LoadContent");
