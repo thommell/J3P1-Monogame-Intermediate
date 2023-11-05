@@ -14,13 +14,14 @@ public class Game1 : Game
     private GraphicsDeviceManager _graphics;
     private SpriteBatch _sb;
 
-
     public Interactable _shieldObject;
     public Interactable _weaponObject;
     public Interactable _gateObject;
 
     private MouseState _mouseState;
     private Point _mousePos;
+
+    private SpriteFont _font;
 
     public Button[] buttons = new Button[2];
 
@@ -35,7 +36,7 @@ public class Game1 : Game
     public List<GameObject> _gameObjectsLevel2 = new List<GameObject>();
     private Viewport _viewport;
 
-    private Scenes scene = Scenes.Menu;
+    public Scenes scene = Scenes.Menu;
     private ButtonStates buttonState = ButtonStates.Normal;
     public enum Scenes
     {
@@ -64,8 +65,10 @@ public class Game1 : Game
     }
     protected override void LoadContent()
     {
+        _game = this;
         //System.Console.WriteLine("LoadContent");
         _sb = new SpriteBatch(GraphicsDevice);
+        _font = Content.Load<SpriteFont>("buttonFont");
 
         // Player Textures
         Texture2D[] playerTextures = {
@@ -73,7 +76,7 @@ public class Game1 : Game
                 Content.Load<Texture2D>("KnightShield"), // 1
                 Content.Load<Texture2D>("KnightWeapon"), // 2
                 Content.Load<Texture2D>("KnightWeaponShield") // 3
-        };
+        };  
 
         Texture2D[] buttonTextures =
         {
@@ -84,19 +87,21 @@ public class Game1 : Game
             Content.Load<Texture2D>("UI_Title")
         };
         //buttons
-        buttons[0] = new PlayButton(buttonTextures[2], new Rectangle(0,0,0,0), new Vector2(200,200));
+        buttons[0] = new PlayButton(buttonTextures[2], new Rectangle(0,0,0,0), new Vector2(200,200), _game, _font);
+        buttons[1] = new QuitButton(buttonTextures[3], new Rectangle(0, 0, 0, 0), new Vector2(400, 400), _font);
 
         // Interactable Textures
         Texture2D _weaponTexture = Content.Load<Texture2D>("Weapon");
         Texture2D _shieldTexture = Content.Load<Texture2D>("Shield");
         Texture2D _gateTexture = Content.Load<Texture2D>("Gate");
-        _game = this;
+
         _player = new Player(new Vector2(100, 100), playerTextures[0], new Rectangle(0, 0, 0, 0), _viewport, playerTextures, _game);
         _shieldObject = new Shield(new Vector2(200, 200), _shieldTexture, new Rectangle(0, 0, 0, 0), "shield", _player, _game);
         _weaponObject = new Weapon(new Vector2(200, 400), _weaponTexture, new Rectangle(0, 0, 0, 0), "weapon", _player, _game);
         _gateObject = new Gate(new Vector2(400, 200), _gateTexture, new Rectangle(0, 0, 0, 0), "gate", _player, _game);
 
         _gameObjectsMenu.Add(buttons[0]);
+        _gameObjectsMenu.Add(buttons[1]);
 
         _gameObjectsLevel1.Add(_player);
         _gameObjectsLevel1.Add(_shieldObject);
@@ -108,14 +113,6 @@ public class Game1 : Game
         buttons[0]._rectangle = new Rectangle((int)buttons[0]._position.X, (int)buttons[0]._position.Y, buttons[0]._texture.Width, buttons[0]._texture.Height);
 
         // mouse behaviour
-
-        _mouseState = Mouse.GetState();
-        _mousePos = new Point(_mouseState.X, _mouseState.Y);
-
-        if (buttons[0]._rectangle.Contains(_mousePos) && _mouseState.LeftButton == ButtonState.Pressed)
-        {
-            scene = Scenes.Level1;
-        }
 
         if (GamePad.GetState(PlayerIndex.One).Buttons.Back == ButtonState.Pressed ||
             Keyboard.GetState().IsKeyDown(Keys.Escape))
