@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 
-namespace J3P1_CSharp_Advanced.OpdrachtenFolder.Opdracht02
+namespace J3P1_CSharp_Advanced.OpdrachtenFolder.OldOpdracht02
 {
     public class Weapon : Interactable
     {

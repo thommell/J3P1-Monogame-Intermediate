@@ -2,7 +2,7 @@
 using Microsoft.Xna.Framework.Graphics;
 using System;
 
-namespace J3P1_CSharp_Advanced.OpdrachtenFolder.Opdracht02
+namespace J3P1_CSharp_Advanced.OpdrachtenFolder.OldOpdracht02
 {
     public class QuitButton : Button
     {

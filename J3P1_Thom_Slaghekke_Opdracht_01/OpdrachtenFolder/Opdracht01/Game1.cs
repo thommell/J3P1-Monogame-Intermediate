@@ -2,8 +2,6 @@
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
-using ButtonState = Microsoft.Xna.Framework.Input.ButtonState;
-using Keys = Microsoft.Xna.Framework.Input.Keys;
 
 namespace J3P1_CSharp_Advanced.OpdrachtenFolder.Opdracht01;
 

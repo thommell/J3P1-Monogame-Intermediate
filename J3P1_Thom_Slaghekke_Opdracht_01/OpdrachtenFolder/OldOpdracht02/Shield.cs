@@ -7,7 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace J3P1_CSharp_Advanced.OpdrachtenFolder.Opdracht02
+namespace J3P1_CSharp_Advanced.OpdrachtenFolder.OldOpdracht02
 {
     public class Shield : Interactable
     {
