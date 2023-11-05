@@ -19,7 +19,7 @@ public class Player : GameObject
     private readonly Viewport _viewPort;
     protected PlayerItems _items = PlayerItems.Normal;
     private Texture2D[] _playerTextures;
-    public Player(Vector2 pPosition, Texture2D pTexture, Rectangle pRectangle, Viewport pViewPort, Texture2D[] pPlayerTextures, Game1 pGame) : base(pPosition, pTexture, pRectangle)
+    public Player(Vector2 pPosition, Texture2D pTexture, Rectangle pRectangle, Vector2 pOrigin, Viewport pViewPort, Texture2D[] pPlayerTextures, Game1 pGame) : base(pPosition, pTexture, pRectangle, pOrigin)
     {
         _viewPort = pViewPort;
         _playerTextures = pPlayerTextures;

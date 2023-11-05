@@ -56,10 +56,10 @@ public class Game1 : Game
         Texture2D _shieldTexture = Content.Load<Texture2D>("Shield");
         Texture2D _gateTexture = Content.Load<Texture2D>("Gate");
         _game = this;
-        _player = new Player(new Vector2(100, 100), playerTextures[0], new Rectangle(0, 0, 0, 0), _viewport, playerTextures, _game);
-        _shieldObject = new Interactable(new Vector2(200, 200), _shieldTexture, new Rectangle(0, 0, 0, 0), "shield", _player, _game);
-        _weaponObject = new Interactable(new Vector2(200, 400), _weaponTexture, new Rectangle(0, 0, 0, 0), "weapon", _player, _game);
-        _gateObject = new Interactable(new Vector2(400, 200), _gateTexture, new Rectangle(0, 0, 0, 0), "gate", _player, _game);
+        _player = new Player(new Vector2(100, 100), playerTextures[0], new Rectangle(0, 0, 0, 0), new Vector2(playerTextures[0].Width / 2, playerTextures[0].Height / 2), _viewport, playerTextures, _game);
+        _shieldObject = new Interactable(new Vector2(200, 200), _shieldTexture, new Rectangle(0, 0, 0, 0), new Vector2(_shieldTexture.Width / 2, _shieldTexture.Height / 2), "shield", _player, _game);
+        _weaponObject = new Interactable(new Vector2(200, 400), _weaponTexture, new Rectangle(0, 0, 0, 0), new Vector2(_weaponTexture.Width / 2, _weaponTexture.Height / 2), "weapon", _player, _game);
+        _gateObject = new Interactable(new Vector2(400, 200), _gateTexture, new Rectangle(0, 0, 0, 0), new Vector2(_gateTexture.Width / 2, _gateTexture.Height / 2), "gate", _player, _game);
 
         _gameObjects.Add(_player);
         _gameObjects.Add(_shieldObject);
@@ -100,4 +100,5 @@ public class Game1 : Game
 
         base.Draw(gameTime);
     }
+
 }

@@ -8,7 +8,7 @@ public class Interactable : GameObject
     private Player _player;
     private Game1 _game1;
     private string _name;
-    public Interactable(Vector2 pPosition, Texture2D pTexture, Rectangle pRectangle, string pObjectName, Player pPlayer, Game1 pGame ) : base(pPosition, pTexture, pRectangle)
+    public Interactable(Vector2 pPosition, Texture2D pTexture, Rectangle pRectangle, Vector2 pOrigin, string pObjectName, Player pPlayer, Game1 pGame) : base(pPosition, pTexture, pRectangle, pOrigin)
     {
         _player = pPlayer;
         _name = pObjectName;
