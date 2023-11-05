@@ -31,7 +31,7 @@ public class Player : GameObject
         ClampPlayer(pGameTime, _viewPort);
         //UpdateTexture();
         UpdateRect();
-        Console.WriteLine(_items);
+       // Console.WriteLine(_items);
     }
 
     private void ClampPlayer(GameTime pGameTime, Viewport pViewport)

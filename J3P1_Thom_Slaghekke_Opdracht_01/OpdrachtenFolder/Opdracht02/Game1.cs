@@ -7,6 +7,9 @@ namespace J3P1_CSharp_Advanced.OpdrachtenFolder.Opdracht02;
 
 public class Game1 : Game
 {
+
+    //TODO: CHECK TRELLO, GEBLEVEN BIJ DE INTERACTABLES/PLAYER LOGIC (PICK-UP) FIXEN.
+    
     private GraphicsDeviceManager _graphics;
     private SpriteBatch _sb;
 
@@ -55,9 +58,9 @@ public class Game1 : Game
         Texture2D _gateTexture = Content.Load<Texture2D>("Gate");
         _game = this;
         _player = new Player(new Vector2(100, 100), playerTextures[0], new Rectangle(0, 0, 0, 0), new Vector2(playerTextures[0].Width / 2, playerTextures[0].Height / 2), _viewport, playerTextures, _game);
-        _shieldObject = new Interactable(new Vector2(200, 200), _shieldTexture, new Rectangle(0, 0, 0, 0), new Vector2(_shieldTexture.Width / 2, _shieldTexture.Height / 2), "shield", _player, _game);
-        _weaponObject = new Interactable(new Vector2(200, 400), _weaponTexture, new Rectangle(0, 0, 0, 0), new Vector2(_weaponTexture.Width / 2, _weaponTexture.Height / 2), "weapon", _player, _game);
-        _gateObject = new Interactable(new Vector2(400, 200), _gateTexture, new Rectangle(0, 0, 0, 0), new Vector2(_gateTexture.Width / 2, _gateTexture.Height / 2), "gate", _player, _game);
+        _shieldObject = new Shield(_shieldTexture, new Rectangle(0, 0, 0, 0), new Vector2(100, 300), new Vector2(_shieldTexture.Width / 2, _shieldTexture.Height / 2), "shield", _player, _game);
+        _weaponObject = new Weapon(_weaponTexture, new Rectangle(0, 0, 0, 0), new Vector2(200, 300), new Vector2(_weaponTexture.Width / 2, _weaponTexture.Height / 2), "weapon", _player, _game);
+        _gateObject = new Gate(_gateTexture, new Rectangle(0, 0, 0, 0), new Vector2(400, 300), new Vector2(_gateTexture.Width / 2, _gateTexture.Height / 2), "gate", _player, _game);
 
         _gameObjects.Add(_player);
         _gameObjects.Add(_shieldObject);
@@ -68,18 +71,14 @@ public class Game1 : Game
 
     protected override void Update(GameTime gameTime)
     {
-        //System.Console.WriteLine("Update");
         if (GamePad.GetState(PlayerIndex.One).Buttons.Back == ButtonState.Pressed ||
             Keyboard.GetState().IsKeyDown(Keys.Escape))
             Exit();
 
-        // System.Console.WriteLine(_gameObjects.Count);
         for (int i = 0; i < _gameObjects.Count; i++)
         {
             _gameObjects[i].UpdateObject(gameTime);
         }
-
-        // TODO: Add your update logic here
     }
 
     protected override void Draw(GameTime gameTime)
