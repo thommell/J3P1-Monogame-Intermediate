@@ -14,16 +14,18 @@ public class Game1 : Game
     private GraphicsDeviceManager _graphics;
     private SpriteBatch _sb;
 
-    public Interactable _shieldObject;
-    public Interactable _weaponObject;
-    public Interactable _gateObject;
+    public Interactable shieldObject;
+    public Interactable weaponObject;
+    public Interactable gateObject;
+
 
     private MouseState _mouseState;
     private Point _mousePos;
 
     private SpriteFont _font;
 
-    public Button[] buttons = new Button[2];
+    public Button playButton;
+    public Button quitButton;
 
     #region Classes
     private Player _player;
@@ -59,7 +61,7 @@ public class Game1 : Game
     protected override void Initialize()
     {
         // TODO: Add your initialization logic here
-        System.Console.WriteLine("Initialize");
+        Console.WriteLine("Initialize");
         _viewport = new Viewport(0, 0, GraphicsDevice.Viewport.Width, GraphicsDevice.Viewport.Height);
         base.Initialize();
     }
@@ -68,7 +70,7 @@ public class Game1 : Game
         _game = this;
         //System.Console.WriteLine("LoadContent");
         _sb = new SpriteBatch(GraphicsDevice);
-        _font = Content.Load<SpriteFont>("buttonFont");
+     
 
         // Player Textures
         Texture2D[] playerTextures = {
@@ -87,8 +89,8 @@ public class Game1 : Game
             Content.Load<Texture2D>("UI_Title")
         };
         //buttons
-        buttons[0] = new PlayButton(buttonTextures[2], new Rectangle(0,0,0,0), new Vector2(200,200), _game, _font);
-        buttons[1] = new QuitButton(buttonTextures[3], new Rectangle(0, 0, 0, 0), new Vector2(400, 400), _font);
+        playButton = new PlayButton(buttonTextures[2], new Rectangle(0,0,0,0), new Vector2(200,200), _game, _font);
+        quitButton = new QuitButton(buttonTextures[3], new Rectangle(0, 0, 0, 0), new Vector2(400, 400), _font);
 
         // Interactable Textures
         Texture2D _weaponTexture = Content.Load<Texture2D>("Weapon");
@@ -96,23 +98,24 @@ public class Game1 : Game
         Texture2D _gateTexture = Content.Load<Texture2D>("Gate");
 
         _player = new Player(new Vector2(100, 100), playerTextures[0], new Rectangle(0, 0, 0, 0), _viewport, playerTextures, _game);
-        _shieldObject = new Shield(new Vector2(200, 200), _shieldTexture, new Rectangle(0, 0, 0, 0), "shield", _player, _game);
-        _weaponObject = new Weapon(new Vector2(200, 400), _weaponTexture, new Rectangle(0, 0, 0, 0), "weapon", _player, _game);
-        _gateObject = new Gate(new Vector2(400, 200), _gateTexture, new Rectangle(0, 0, 0, 0), "gate", _player, _game);
+        shieldObject = new Shield(new Vector2(200, 200), _shieldTexture, new Rectangle(0, 0, 0, 0), "shield", _player, _game);
+        weaponObject = new Weapon(new Vector2(200, 400), _weaponTexture, new Rectangle(0, 0, 0, 0), "weapon", _player, _game);
+        gateObject = new Gate(new Vector2(400, 200), _gateTexture, new Rectangle(0, 0, 0, 0), "gate", _player, _game);
 
-        _gameObjectsMenu.Add(buttons[0]);
-        _gameObjectsMenu.Add(buttons[1]);
+        _gameObjectsMenu.Add(playButton);
+        _gameObjectsMenu.Add(quitButton);
 
         _gameObjectsLevel1.Add(_player);
-        _gameObjectsLevel1.Add(_shieldObject);
-        _gameObjectsLevel1.Add(_weaponObject);
-        _gameObjectsLevel1.Add(_gateObject);
+        _gameObjectsLevel1.Add(shieldObject);
+        _gameObjectsLevel1.Add(weaponObject);
+        _gameObjectsLevel1.Add(gateObject);
     }
     protected override void Update(GameTime gameTime)
     {
-        buttons[0]._rectangle = new Rectangle((int)buttons[0]._position.X, (int)buttons[0]._position.Y, buttons[0]._texture.Width, buttons[0]._texture.Height);
-
-        // mouse behaviour
+        // put this in its own script
+        //!!!
+        playButton._rectangle = new Rectangle((int)playButton._position.X, (int)playButton._position.Y, playButton._texture.Width, playButton._texture.Height);
+        //!!!
 
         if (GamePad.GetState(PlayerIndex.One).Buttons.Back == ButtonState.Pressed ||
             Keyboard.GetState().IsKeyDown(Keys.Escape))

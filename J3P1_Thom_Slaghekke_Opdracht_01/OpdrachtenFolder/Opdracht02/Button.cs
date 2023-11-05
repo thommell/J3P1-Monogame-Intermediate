@@ -28,11 +28,5 @@ namespace J3P1_CSharp_Advanced.OpdrachtenFolder.Opdracht02
         {
             
         }
-
-        public override void DrawObject(SpriteBatch pSpriteBatch)
-        {
-            base.DrawObject(pSpriteBatch);
-            pSpriteBatch.DrawString(_font, "hi", _position, Color.White);
-        }
     }
 }
