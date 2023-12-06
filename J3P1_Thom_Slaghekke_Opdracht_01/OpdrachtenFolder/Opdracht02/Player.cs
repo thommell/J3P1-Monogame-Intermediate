@@ -95,7 +95,7 @@ public class Player : GameObject
     {
         if (pObjectName == "shield" && _items == PlayerItems.Normal)
         {
-            Console.WriteLine(_game1._gameObjects.Count);
+            Console.WriteLine(_game1._gameObjectsLevel1.Count);
             _items = PlayerItems.Shield;
         } 
         else if (pObjectName == "weapon" && _items == PlayerItems.Normal)

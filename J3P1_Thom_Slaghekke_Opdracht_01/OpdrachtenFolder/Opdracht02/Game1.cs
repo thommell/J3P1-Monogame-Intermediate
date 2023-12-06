@@ -9,19 +9,29 @@ public class Game1 : Game
 {
 
     //TODO: CHECK TRELLO, GEBLEVEN BIJ DE INTERACTABLES/PLAYER LOGIC (PICK-UP) FIXEN.
-    
-    private GraphicsDeviceManager _graphics;
-    private SpriteBatch _sb;
 
+    // Objects
     private Player _player;
     public Interactable _shieldObject;
     public Interactable _weaponObject;
     public Interactable _gateObject;
     private Game1 _game;
+    private Button _playButton;
+    private Button _quitButton;
 
-    public List<GameObject> _gameObjects = new List<GameObject>();
+    // Variables
+    private GraphicsDeviceManager _graphics;
+    private SpriteBatch _sb;
+    public List<GameObject> _gameObjectsMenu = new List<GameObject>();
+    public List<GameObject> _gameObjectsLevel1 = new List<GameObject>();
+    public List<GameObject> _gameObjectsLevel2 = new List<GameObject>();
     private Viewport _viewport;
 
+    private float _windowWidth;
+    private float _windowHeight;
+
+    // Enums
+    private LevelState _currentLevel = LevelState.Menu;
 
     public Game1()
     {
@@ -44,7 +54,8 @@ public class Game1 : Game
     {
         //System.Console.WriteLine("LoadContent");
         _sb = new SpriteBatch(GraphicsDevice);
-
+        _windowWidth = GraphicsDevice.Viewport.Width;
+        _windowHeight = GraphicsDevice.Viewport.Height;
         // Player Textures
         Texture2D[] playerTextures = {
                 Content.Load<Texture2D>("Knight"), // 0
@@ -56,45 +67,109 @@ public class Game1 : Game
         Texture2D _weaponTexture = Content.Load<Texture2D>("Weapon");
         Texture2D _shieldTexture = Content.Load<Texture2D>("Shield");
         Texture2D _gateTexture = Content.Load<Texture2D>("Gate");
+        Texture2D[] _buttonTextures =
+        {
+            Content.Load<Texture2D>("UI_Tile_64x64"),
+            Content.Load<Texture2D>("UI_Tile_128x64")
+        };
         _game = this;
-        _player = new Player(new Vector2(100, 100), playerTextures[0], new Rectangle(0, 0, 0, 0), new Vector2(playerTextures[0].Width / 2, playerTextures[0].Height / 2), _viewport, playerTextures, _game);
-        _shieldObject = new Shield(_shieldTexture, new Rectangle(0, 0, 0, 0), new Vector2(100, 300), new Vector2(_shieldTexture.Width / 2, _shieldTexture.Height / 2), "shield", _player, _game);
-        _weaponObject = new Weapon(_weaponTexture, new Rectangle(0, 0, 0, 0), new Vector2(200, 300), new Vector2(_weaponTexture.Width / 2, _weaponTexture.Height / 2), "weapon", _player, _game);
-        _gateObject = new Gate(_gateTexture, new Rectangle(0, 0, 0, 0), new Vector2(400, 300), new Vector2(_gateTexture.Width / 2, _gateTexture.Height / 2), "gate", _player, _game);
+        _player = new Player(new Vector2(100, 100), playerTextures[0], new Rectangle(0, 0, 0, 0), GetOrigin(playerTextures[0]), _viewport, playerTextures, _game);
+        _shieldObject = new Shield(_shieldTexture, new Rectangle(0, 0, 0, 0), new Vector2(100, 300), GetOrigin(_shieldTexture), "shield", _player, _game);
+        _weaponObject = new Weapon(_weaponTexture, new Rectangle(0, 0, 0, 0), new Vector2(200, 300), GetOrigin(_weaponTexture), "weapon", _player, _game);
+        _gateObject = new Gate(_gateTexture, new Rectangle(0, 0, 0, 0), new Vector2(400, 300), GetOrigin(_gateTexture), "gate", _player, _game);
+        _playButton = new Button(new Vector2(_windowWidth / 2, _windowHeight / 2), _buttonTextures[1], new Rectangle(0,0,0,0), GetOrigin(_buttonTextures[1]));
+        _quitButton = new Button(new Vector2(_windowWidth / 2, _windowHeight / 2 + 100), _buttonTextures[1], new Rectangle(0, 0, 0, 0), GetOrigin(_buttonTextures[1]));
 
-        _gameObjects.Add(_player);
-        _gameObjects.Add(_shieldObject);
-        _gameObjects.Add(_weaponObject);
-        _gameObjects.Add(_gateObject);
+        // Menu
+        _gameObjectsMenu.Add(_playButton);
+        _gameObjectsMenu.Add(_quitButton);
+
+        // Level1
+        _gameObjectsLevel1.Add(_player);
+        _gameObjectsLevel1.Add(_shieldObject);
+        _gameObjectsLevel1.Add(_weaponObject);
+        _gameObjectsLevel1.Add(_gateObject);
+
+        // Level2
+
         // TODO: use this.Content to load your game content here
     }
-
+    private Vector2 GetOrigin(Texture2D pTexture)
+    {
+        Vector2 originVector = new Vector2(pTexture.Width / 2, pTexture.Height / 2);
+        return originVector;
+    }
     protected override void Update(GameTime gameTime)
     {
         if (GamePad.GetState(PlayerIndex.One).Buttons.Back == ButtonState.Pressed ||
             Keyboard.GetState().IsKeyDown(Keys.Escape))
-            Exit();
-
-        for (int i = 0; i < _gameObjects.Count; i++)
         {
-            _gameObjects[i].UpdateObject(gameTime);
+            _currentLevel = LevelState.Level1;
+        }
+
+        switch (_currentLevel)
+        {
+        case LevelState.Menu:
+            {
+                for (int i = 0; i < _gameObjectsMenu.Count; i++)
+                {
+                    _gameObjectsMenu[i].UpdateObject(gameTime);
+                }
+                break;
+            }
+        case LevelState.Level1:
+            {
+                for (int i = 0; i < _gameObjectsLevel1.Count; i++)
+                {
+                    _gameObjectsLevel1[i].UpdateObject(gameTime);
+                }
+
+                break;
+            }
+        case LevelState.Level2:
+            {
+                for (int i = 0; i < _gameObjectsLevel2.Count; i++)
+                {
+                    _gameObjectsLevel2[i].UpdateObject(gameTime);
+                }
+                break;
+            }
         }
     }
-
     protected override void Draw(GameTime gameTime)
     {
         GraphicsDevice.Clear(Color.Black);
 
         // TODO: Add your drawing code here
         _sb.Begin();
-
-        for (int i = 0; i < _gameObjects.Count; i++)
+        switch (_currentLevel)
         {
-            _gameObjects[i].DrawObject(_sb);
+        case LevelState.Menu:
+            {
+                for (int i = 0; i < _gameObjectsMenu.Count; i++)
+                {
+                    _gameObjectsMenu[i].DrawObject(_sb);
+                }
+                break;
+            }
+        case LevelState.Level1:
+            {
+                for (int i = 0; i < _gameObjectsLevel1.Count; i++)
+                {
+                    _gameObjectsLevel1[i].DrawObject(_sb);
+                }
+                break;
+            }
+        case LevelState.Level2:
+            {
+                for (int i = 0; i < _gameObjectsLevel2.Count; i++)
+                {
+                    _gameObjectsLevel2[i].DrawObject(_sb);
+                }
+                break;
+            }
         }
-
         _sb.End();
-
         base.Draw(gameTime);
     }
 

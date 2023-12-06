@@ -20,7 +20,7 @@ namespace J3P1_CSharp_Advanced.OpdrachtenFolder.Opdracht02
         public override void OnCollision()
         {
             _player.CollidedWith(_objName);
-            _game1._gameObjects.Remove(this);
+            _game1._gameObjectsLevel1.Remove(this);
         }
     }
 }

@@ -15,16 +15,16 @@ public class GameObject
         _position = pPosition;
         _texture = pTexture;
         _rectangle = pRectangle;
-        _origin = pOrigin;
+        _origin = pOrigin;       
     }
+
     public virtual void UpdateObject(GameTime pGameTime)
     {
         
     }
     public virtual void DrawObject(SpriteBatch pSpriteBatch)
     {
-        pSpriteBatch.Draw(_texture, _position, Color.White);
-        //pSpriteBatch.Draw(_texture, _rectangle, Color.Red); for every rectangle 
+        pSpriteBatch.Draw(_texture, _position, null, Color.White, 0f, _origin, new Vector2(1,1), SpriteEffects.None, 0f);
     }
 }
 
