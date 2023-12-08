@@ -8,7 +8,7 @@ namespace J3P1_CSharp_Advanced.OpdrachtenFolder.Opdracht02
 {
     public class QuitButton : Button
     {
-        public QuitButton(Vector2 pPosition, Texture2D pTexture, Rectangle pRectangle, Game1 pGame) : base(pPosition, pTexture, pRectangle, pGame)
+        public QuitButton(Vector2 pPosition, Texture2D pTexture, Rectangle pRectangle) : base(pPosition, pTexture, pRectangle)
         {
         
         }
@@ -29,6 +29,10 @@ namespace J3P1_CSharp_Advanced.OpdrachtenFolder.Opdracht02
         /// Exits the environment and cancels the build.
         /// </summary>
         protected override void OnClick()
+        {
+            ExitGame();
+        }
+        private void ExitGame()
         {
             Environment.Exit(0);
         }

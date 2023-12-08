@@ -5,9 +5,9 @@ using System;
 
 namespace J3P1_CSharp_Advanced.OpdrachtenFolder.Opdracht02
 {
-    public class PlayButton : Button
+    public class BackButton : Button
     {
-        public PlayButton(Vector2 pPositon, Texture2D pTexture, Rectangle pRectangle, Game1 pGame) : base(pPositon, pTexture, pRectangle, pGame)
+        public BackButton(Vector2 pPosition, Texture2D pTexture, Rectangle pRectangle, Game1 pGame) : base(pPosition, pTexture, pRectangle, pGame)
         {
 
         }
@@ -19,13 +19,13 @@ namespace J3P1_CSharp_Advanced.OpdrachtenFolder.Opdracht02
         {
             base.StateHovered();
         }
-        protected override void StatePressed()
+        protected override void StatePressed() 
         {
             base.StatePressed();
         }
         protected override void OnClick()
         {
-            _game.SwapScene("level1");
+            _game.SwapScene("menu");
         }
     }
 }

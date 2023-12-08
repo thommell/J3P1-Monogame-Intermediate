@@ -22,6 +22,10 @@ namespace J3P1_CSharp_Advanced.OpdrachtenFolder.Opdracht02
         {
             _game = game;   
         }
+        public Button(Vector2 pPosition, Texture2D pTexture, Rectangle pRectangle) : base(pPosition, pTexture, pRectangle)
+        {
+
+        }
         /// <summary>
         /// Update object Button on each frame.
         /// </summary>
