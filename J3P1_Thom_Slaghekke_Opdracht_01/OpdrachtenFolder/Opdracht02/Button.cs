@@ -62,9 +62,10 @@ namespace J3P1_CSharp_Advanced.OpdrachtenFolder.Opdracht02
         /// </summary>
         protected virtual void StateNormal()
         {
+            _buttonColor = Color.White;
             if (_rectangle.Contains(_mousePosition))
             {
-                _buttonColor = Color.White;
+                _buttonColor = Color.Red;
                 _currentButtonState = CurrentButtonState.Hovered;
             }
         }
@@ -75,12 +76,11 @@ namespace J3P1_CSharp_Advanced.OpdrachtenFolder.Opdracht02
         {
             if (!_rectangle.Contains(_mousePosition))
             {
-                _buttonColor = Color.Red;
                 _currentButtonState = CurrentButtonState.Normal;
             }
             if (_mouseState.LeftButton == ButtonState.Pressed && _previousMouseClick == ButtonState.Released)
             {
-                _buttonColor = Color.DarkRed;
+                _buttonColor = Color.Red;
                 _currentButtonState = CurrentButtonState.Pressed;
             }
         }
@@ -105,9 +105,10 @@ namespace J3P1_CSharp_Advanced.OpdrachtenFolder.Opdracht02
         {
 
         }
-        //public override void DrawObject(SpriteBatch pSpriteBatch)
-        //{
-        //    pSpriteBatch.Draw(_texture, _position, null, _buttonColor, 0f, _origin, new Vector2(1, 1), SpriteEffects.None, 0f);
-        //}
+        public override void DrawObject(SpriteBatch pSpriteBatch)
+        {
+            base.DrawObject(pSpriteBatch);
+            pSpriteBatch.Draw(_texture, _position, null, _buttonColor, 0f, Vector2.Zero, new Vector2(1, 1), SpriteEffects.None, 0f);
+        }
     }
 }
