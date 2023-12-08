@@ -16,9 +16,11 @@ namespace J3P1_CSharp_Advanced.OpdrachtenFolder.Opdracht02
         protected Point _mousePosition;
         protected Color _buttonColor;
         protected MouseState _mouseState;
-        public Button(Vector2 pPosition, Texture2D pTexture, Rectangle pRectangle) : base(pPosition, pTexture, pRectangle)
+        protected ButtonState _previousMouseClick = Mouse.GetState().LeftButton;
+        protected Game1 _game;
+        public Button(Vector2 pPosition, Texture2D pTexture, Rectangle pRectangle, Game1 game) : base(pPosition, pTexture, pRectangle)
         {
-
+            _game = game;   
         }
         /// <summary>
         /// Update object Button on each frame.
@@ -41,6 +43,7 @@ namespace J3P1_CSharp_Advanced.OpdrachtenFolder.Opdracht02
                     StatePressed();
                 break;
             }
+            _previousMouseClick = _mouseState.LeftButton;
         }   
         /// <summary>
         /// Updates the rectangle of the button.
@@ -71,9 +74,10 @@ namespace J3P1_CSharp_Advanced.OpdrachtenFolder.Opdracht02
                 _buttonColor = Color.Red;
                 _currentButtonState = CurrentButtonState.Normal;
             }
-            else
+            if (_mouseState.LeftButton == ButtonState.Pressed && _previousMouseClick == ButtonState.Released)
             {
-                _buttonColor = Color.White;
+                _buttonColor = Color.DarkRed;
+                _currentButtonState = CurrentButtonState.Pressed;
             }
         }
         /// <summary>
@@ -84,12 +88,13 @@ namespace J3P1_CSharp_Advanced.OpdrachtenFolder.Opdracht02
             if (_rectangle.Contains(_mousePosition) && _mouseState.LeftButton == ButtonState.Pressed)
             {
                 _buttonColor = Color.Blue;
-                _currentButtonState = CurrentButtonState.Pressed;
+                _currentButtonState = CurrentButtonState.Hovered;
                 OnClick();
             }
             else
             {
                 _buttonColor = Color.White;
+                _currentButtonState = CurrentButtonState.Normal;
             }
         }
         protected virtual void OnClick()

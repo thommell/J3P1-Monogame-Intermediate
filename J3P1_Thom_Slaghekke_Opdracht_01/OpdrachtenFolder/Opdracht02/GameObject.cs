@@ -10,10 +10,9 @@ public class GameObject
     public Rectangle _rectangle;
     protected GameObject(Vector2 pPosition, Texture2D pTexture, Rectangle pRectangle)
     {
-        _position = pPosition;
         _texture = pTexture;
         _rectangle = pRectangle;
-        _position = new Vector2(_position.X - (_texture.Width / 2), _position.Y - (_texture.Height / 2));
+        _position = new Vector2(pPosition.X - (_texture.Width / 2), pPosition.Y - (_texture.Height / 2));
     }
     public virtual void UpdateObject(GameTime pGameTime)
     {

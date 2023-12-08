@@ -7,7 +7,7 @@ namespace J3P1_CSharp_Advanced.OpdrachtenFolder.Opdracht02
 {
     public class PlayButton : Button
     {
-        public PlayButton(Vector2 pPositon, Texture2D pTexture, Rectangle pRectangle) : base(pPositon, pTexture, pRectangle)
+        public PlayButton(Vector2 pPositon, Texture2D pTexture, Rectangle pRectangle, Game1 pGame) : base(pPositon, pTexture, pRectangle, pGame)
         {
 
         }
@@ -30,10 +30,7 @@ namespace J3P1_CSharp_Advanced.OpdrachtenFolder.Opdracht02
         }
         protected override void OnClick()
         {
-            if (_levelState != LevelState.Level1)
-            {
-                _levelState = LevelState.Level1;
-            }
+            _game.SwapScene("level1");
         }
     }
 }

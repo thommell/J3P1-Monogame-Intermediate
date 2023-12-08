@@ -1,4 +1,7 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
+using System.Data;
+using System.Windows.Forms.Design.Behavior;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
@@ -34,7 +37,6 @@ public class Game1 : Game
 
     // Enums
     private LevelState _currentLevel = LevelState.Menu;
-    private CurrentButtonState _currentButtonState;
     public Game1()
     {
         _graphics = new GraphicsDeviceManager(this);
@@ -75,8 +77,8 @@ public class Game1 : Game
         _shieldObject = new Shield(_shieldTexture, new Rectangle(0, 0, 0, 0), new Vector2(100, 300), "shield", _player, _game);
         _weaponObject = new Weapon(_weaponTexture, new Rectangle(0, 0, 0, 0), new Vector2(200, 300), "weapon", _player, _game);
         _gateObject = new Gate(_gateTexture, new Rectangle(0, 0, 0, 0), new Vector2(_windowWidth / 2, _windowHeight / 2), "gate", _player, _game);
-        _playButton = new PlayButton(new Vector2(_windowWidth / 2, _windowHeight / 2), _buttonTextures[1], new Rectangle(0,0,0,0));
-        _quitButton = new Button(new Vector2(_windowWidth / 2, _windowHeight / 2 + 100), _buttonTextures[1], new Rectangle(0, 0, 0, 0));
+        _playButton = new PlayButton(new Vector2(_windowWidth / 2, _windowHeight / 2), _buttonTextures[1], new Rectangle(0,0,0,0), _game);
+        _quitButton = new Button(new Vector2(_windowWidth / 2, _windowHeight / 2 + 100), _buttonTextures[1], new Rectangle(0, 0, 0, 0), _game);
 
         // Menu
         _gameObjectsMenu.Add(_playButton);
@@ -95,8 +97,10 @@ public class Game1 : Game
         if (GamePad.GetState(PlayerIndex.One).Buttons.Back == ButtonState.Pressed ||
             Keyboard.GetState().IsKeyDown(Keys.Escape))
         {
-            _currentLevel = LevelState.Level1;
+            Environment.Exit(0);
         }
+
+        Console.WriteLine(_currentLevel);
         switch (_currentLevel)
         {
         case LevelState.Menu:
@@ -124,6 +128,24 @@ public class Game1 : Game
                 }
                 break;
             }
+        }
+    }
+    public void SwapScene(string pString)
+    {
+        switch (pString.ToLower())
+        {
+            case "menu":
+                _currentLevel = LevelState.Menu;
+                break;
+            case "level1":
+                _currentLevel = LevelState.Level1;
+                break;
+            case "level2":
+                _currentLevel = LevelState.Level2;
+                break;
+            default:
+                Console.WriteLine("ERROR! Not a correct string.");
+                break;
         }
     }
     protected override void Draw(GameTime gameTime)
