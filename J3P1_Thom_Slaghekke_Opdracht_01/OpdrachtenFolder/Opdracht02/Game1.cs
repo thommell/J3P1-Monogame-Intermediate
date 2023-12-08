@@ -78,7 +78,7 @@ public class Game1 : Game
         _weaponObject = new Weapon(_weaponTexture, new Rectangle(0, 0, 0, 0), new Vector2(200, 300), "weapon", _player, _game);
         _gateObject = new Gate(_gateTexture, new Rectangle(0, 0, 0, 0), new Vector2(_windowWidth / 2, _windowHeight / 2), "gate", _player, _game);
         _playButton = new PlayButton(new Vector2(_windowWidth / 2, _windowHeight / 2), _buttonTextures[1], new Rectangle(0,0,0,0), _game);
-        _quitButton = new Button(new Vector2(_windowWidth / 2, _windowHeight / 2 + 100), _buttonTextures[1], new Rectangle(0, 0, 0, 0), _game);
+        _quitButton = new QuitButton(new Vector2(_windowWidth / 2, _windowHeight / 2 + 100), _buttonTextures[1], new Rectangle(0, 0, 0, 0), _game);
 
         // Menu
         _gameObjectsMenu.Add(_playButton);
