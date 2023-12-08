@@ -11,7 +11,7 @@ namespace J3P1_CSharp_Advanced.OpdrachtenFolder.Opdracht02
         private Player _player;
         private Game1 _game1;
         private string _objName;
-        public Gate(Texture2D pTexture, Rectangle pRectangle, Vector2 pPosition, Vector2 pOrigin, string pObjectName, Player pPlayer, Game1 pGame) : base(pPosition, pTexture, pRectangle, pOrigin, pPlayer, pGame)
+        public Gate(Texture2D pTexture, Rectangle pRectangle, Vector2 pPosition, string pObjectName, Player pPlayer, Game1 pGame) : base(pPosition, pTexture, pRectangle, pPlayer, pGame)
         {
             _player = pPlayer;
             _game1 = pGame;

@@ -7,21 +7,23 @@ namespace J3P1_CSharp_Advanced.OpdrachtenFolder.Opdracht02;
 
 public class Game1 : Game
 {
-
-    //TODO: CHECK TRELLO, GEBLEVEN BIJ DE INTERACTABLES/PLAYER LOGIC (PICK-UP) FIXEN.
-
     // Objects
     private Player _player;
+
     public Interactable _shieldObject;
     public Interactable _weaponObject;
     public Interactable _gateObject;
+
     private Game1 _game;
+
     private Button _playButton;
     private Button _quitButton;
 
     // Variables
     private GraphicsDeviceManager _graphics;
+
     private SpriteBatch _sb;
+
     public List<GameObject> _gameObjectsMenu = new List<GameObject>();
     public List<GameObject> _gameObjectsLevel1 = new List<GameObject>();
     public List<GameObject> _gameObjectsLevel2 = new List<GameObject>();
@@ -32,24 +34,20 @@ public class Game1 : Game
 
     // Enums
     private LevelState _currentLevel = LevelState.Menu;
-
+    private CurrentButtonState _currentButtonState;
     public Game1()
     {
         _graphics = new GraphicsDeviceManager(this);
         Content.RootDirectory = "Content";
         IsMouseVisible = true;
     }
-
     protected override void Initialize()
     {
         // TODO: Add your initialization logic here
         System.Console.WriteLine("Initialize");
-
         _viewport = new Viewport(0, 0, GraphicsDevice.Viewport.Width, GraphicsDevice.Viewport.Height);
-
         base.Initialize();
     }
-
     protected override void LoadContent()
     {
         //System.Console.WriteLine("LoadContent");
@@ -73,12 +71,12 @@ public class Game1 : Game
             Content.Load<Texture2D>("UI_Tile_128x64")
         };
         _game = this;
-        _player = new Player(new Vector2(100, 100), playerTextures[0], new Rectangle(0, 0, 0, 0), GetOrigin(playerTextures[0]), _viewport, playerTextures, _game);
-        _shieldObject = new Shield(_shieldTexture, new Rectangle(0, 0, 0, 0), new Vector2(100, 300), GetOrigin(_shieldTexture), "shield", _player, _game);
-        _weaponObject = new Weapon(_weaponTexture, new Rectangle(0, 0, 0, 0), new Vector2(200, 300), GetOrigin(_weaponTexture), "weapon", _player, _game);
-        _gateObject = new Gate(_gateTexture, new Rectangle(0, 0, 0, 0), new Vector2(400, 300), GetOrigin(_gateTexture), "gate", _player, _game);
-        _playButton = new Button(new Vector2(_windowWidth / 2, _windowHeight / 2), _buttonTextures[1], new Rectangle(0,0,0,0), GetOrigin(_buttonTextures[1]));
-        _quitButton = new Button(new Vector2(_windowWidth / 2, _windowHeight / 2 + 100), _buttonTextures[1], new Rectangle(0, 0, 0, 0), GetOrigin(_buttonTextures[1]));
+        _player = new Player(new Vector2(100, 100), playerTextures[0], new Rectangle(0, 0, 0, 0), _viewport, playerTextures, _game);
+        _shieldObject = new Shield(_shieldTexture, new Rectangle(0, 0, 0, 0), new Vector2(100, 300), "shield", _player, _game);
+        _weaponObject = new Weapon(_weaponTexture, new Rectangle(0, 0, 0, 0), new Vector2(200, 300), "weapon", _player, _game);
+        _gateObject = new Gate(_gateTexture, new Rectangle(0, 0, 0, 0), new Vector2(_windowWidth / 2, _windowHeight / 2), "gate", _player, _game);
+        _playButton = new PlayButton(new Vector2(_windowWidth / 2, _windowHeight / 2), _buttonTextures[1], new Rectangle(0,0,0,0));
+        _quitButton = new Button(new Vector2(_windowWidth / 2, _windowHeight / 2 + 100), _buttonTextures[1], new Rectangle(0, 0, 0, 0));
 
         // Menu
         _gameObjectsMenu.Add(_playButton);
@@ -91,13 +89,6 @@ public class Game1 : Game
         _gameObjectsLevel1.Add(_gateObject);
 
         // Level2
-
-        // TODO: use this.Content to load your game content here
-    }
-    private Vector2 GetOrigin(Texture2D pTexture)
-    {
-        Vector2 originVector = new Vector2(pTexture.Width / 2, pTexture.Height / 2);
-        return originVector;
     }
     protected override void Update(GameTime gameTime)
     {
@@ -106,7 +97,6 @@ public class Game1 : Game
         {
             _currentLevel = LevelState.Level1;
         }
-
         switch (_currentLevel)
         {
         case LevelState.Menu:

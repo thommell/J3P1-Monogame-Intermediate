@@ -9,23 +9,27 @@ using System.Threading.Tasks;
 
 namespace J3P1_CSharp_Advanced.OpdrachtenFolder.Opdracht02
 {
-    public enum CurrentButtonState
-    {
-        Normal,
-        Hovered,
-        Pressed
-    }
     public class Button : GameObject
     {
-        CurrentButtonState _buttonState;
+        protected CurrentButtonState _currentButtonState;
         protected LevelState _levelState;
-        public Button(Vector2 pPosition, Texture2D pTexture, Rectangle pRectangle, Vector2 pOrigin) : base(pPosition, pTexture, pRectangle, pOrigin)
+        protected Point _mousePosition;
+        protected Color _buttonColor;
+        protected MouseState _mouseState;
+        public Button(Vector2 pPosition, Texture2D pTexture, Rectangle pRectangle) : base(pPosition, pTexture, pRectangle)
         {
 
         }
+        /// <summary>
+        /// Update object Button on each frame.
+        /// </summary>
+        /// <param name="pGameTime"></param>
         public override void UpdateObject(GameTime pGameTime)
         {
-            switch (_buttonState)
+            UpdateRectangle();
+            _mouseState = Mouse.GetState();
+            _mousePosition = new Point(_mouseState.X, _mouseState.Y);
+            switch (_currentButtonState)
             {
                 case CurrentButtonState.Normal:
                     StateNormal();
@@ -37,18 +41,64 @@ namespace J3P1_CSharp_Advanced.OpdrachtenFolder.Opdracht02
                     StatePressed();
                 break;
             }
-        }      
-        public virtual void StateNormal()
+        }   
+        /// <summary>
+        /// Updates the rectangle of the button.
+        /// </summary>
+        private void UpdateRectangle()
+        {
+            _rectangle = new Rectangle((int)_position.X, (int)_position.Y, _texture.Width, _texture.Height);
+            Console.WriteLine(_rectangle.X);
+        }
+        /// <summary>
+        /// Handle normal state of button.
+        /// </summary>
+        protected virtual void StateNormal()
+        {
+            if (_rectangle.Contains(_mousePosition))
+            {
+                _buttonColor = Color.White;
+                _currentButtonState = CurrentButtonState.Hovered;
+            }
+        }
+        /// <summary>
+        /// Handle hovered state of button.
+        /// </summary>
+        protected virtual void StateHovered()
+        {
+            if (!_rectangle.Contains(_mousePosition))
+            {
+                _buttonColor = Color.Red;
+                _currentButtonState = CurrentButtonState.Normal;
+            }
+            else
+            {
+                _buttonColor = Color.White;
+            }
+        }
+        /// <summary>
+        /// Handle pressed state of button.
+        /// </summary>
+        protected virtual void StatePressed()
+        {
+            if (_rectangle.Contains(_mousePosition) && _mouseState.LeftButton == ButtonState.Pressed)
+            {
+                _buttonColor = Color.Blue;
+                _currentButtonState = CurrentButtonState.Pressed;
+                OnClick();
+            }
+            else
+            {
+                _buttonColor = Color.White;
+            }
+        }
+        protected virtual void OnClick()
         {
 
         }
-        public virtual void StateHovered()
-        {
-
-        }
-        public virtual void StatePressed()
-        {
-
-        }
+        //public override void DrawObject(SpriteBatch pSpriteBatch)
+        //{
+        //    pSpriteBatch.Draw(_texture, _position, null, _buttonColor, 0f, _origin, new Vector2(1, 1), SpriteEffects.None, 0f);
+        //}
     }
 }
