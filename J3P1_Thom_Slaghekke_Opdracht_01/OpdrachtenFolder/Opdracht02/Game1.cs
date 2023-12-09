@@ -91,7 +91,7 @@ public class Game1 : Game
         _backButton = new BackButton(new Vector2(_windowWidth - (_buttonTextures[1].Width / 2), 0 + _buttonTextures[1].Height - (_buttonTextures[1].Height / 2)), _buttonTextures[1], new Rectangle(0, 0, 0, 0), _font, _game, "MENU");
         _gateLevel2 = new Gate(_gateTexture, new Rectangle(0, 0, 0, 0), new Vector2(0 + (_gateTexture.Width / 2), _windowHeight - (_gateTexture.Height / 2)), "gate2", _player, _game);
 
-        _enemy1 = new Enemy(new Vector2(_windowWidth / 2, _windowHeight / 2 ), _enemyTexture, new Rectangle(0, 0, 0, 0), _player, 120f);
+        _enemy1 = new Enemy(new Vector2(_windowWidth / 2, _windowHeight / 2 ), _enemyTexture, new Rectangle(0, 0, 0, 0), _player, GraphicsDevice, 120f, 4);
 
         // Menu
         _gameObjectsMenu.Add(_playButton);
