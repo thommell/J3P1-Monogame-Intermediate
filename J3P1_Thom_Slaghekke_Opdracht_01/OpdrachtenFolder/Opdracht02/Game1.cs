@@ -15,7 +15,8 @@ public class Game1 : Game
 
     public Interactable _shieldObject;
     public Interactable _weaponObject;
-    public Interactable _gateObject;
+    public Interactable _gateLevel1;
+    public Interactable _gateLevel2;
 
     private Game1 _game;
 
@@ -27,6 +28,8 @@ public class Game1 : Game
     private GraphicsDeviceManager _graphics;
 
     private SpriteBatch _sb;
+
+    private SpriteFont _font;
 
     public List<GameObject> _gameObjectsMenu = new List<GameObject>();
     public List<GameObject> _gameObjectsLevel1 = new List<GameObject>();
@@ -55,6 +58,9 @@ public class Game1 : Game
     {
         //System.Console.WriteLine("LoadContent");
         _sb = new SpriteBatch(GraphicsDevice);
+
+        _font = Content.Load<SpriteFont>("buttonFont");
+
         _windowWidth = GraphicsDevice.Viewport.Width;
         _windowHeight = GraphicsDevice.Viewport.Height;
         // Player Textures
@@ -77,10 +83,11 @@ public class Game1 : Game
         _player = new Player(new Vector2(100, 100), playerTextures[0], new Rectangle(0, 0, 0, 0), _viewport, playerTextures, _game);
         _shieldObject = new Shield(_shieldTexture, new Rectangle(0, 0, 0, 0), new Vector2(100, 300), "shield", _player, _game);
         _weaponObject = new Weapon(_weaponTexture, new Rectangle(0, 0, 0, 0), new Vector2(200, 300), "weapon", _player, _game);
-        _gateObject = new Gate(_gateTexture, new Rectangle(0, 0, 0, 0), new Vector2(_windowWidth / 2, _windowHeight / 2), "gate", _player, _game);
-        _playButton = new PlayButton(new Vector2(_windowWidth / 2, _windowHeight / 2), _buttonTextures[1], new Rectangle(0,0,0,0), _game);
-        _quitButton = new QuitButton(new Vector2(_windowWidth / 2, _windowHeight / 2 + 100), _buttonTextures[1], new Rectangle(0, 0, 0, 0));
+        _gateLevel1 = new Gate(_gateTexture, new Rectangle(0, 0, 0, 0), new Vector2(0 + (_gateTexture.Width / 2), _windowHeight - (_gateTexture.Height / 2)), "gate", _player, _game);
+        _playButton = new PlayButton(new Vector2(_windowWidth / 2, _windowHeight / 2), _buttonTextures[1], new Rectangle(0,0,0,0), _game, _font, "PLAY");
+        _quitButton = new QuitButton(new Vector2(_windowWidth / 2, _windowHeight / 2 + 100), _buttonTextures[1], new Rectangle(0, 0, 0, 0), _font, "QUIT");
         _backButton = new BackButton(new Vector2(_windowWidth - (_buttonTextures[1].Width / 2), 0 + _buttonTextures[1].Height - (_buttonTextures[1].Height / 2)), _buttonTextures[1], new Rectangle(0, 0, 0, 0), _game);
+        _gateLevel2 = new Gate(_gateTexture, new Rectangle(0, 0, 0, 0), new Vector2(0 + (_gateTexture.Width / 2), _windowHeight - (_gateTexture.Height / 2)), "gate2", _player, _game);
 
         // Menu
         _gameObjectsMenu.Add(_playButton);
@@ -90,10 +97,13 @@ public class Game1 : Game
         _gameObjectsLevel1.Add(_player);
         _gameObjectsLevel1.Add(_shieldObject);
         _gameObjectsLevel1.Add(_weaponObject);
-        _gameObjectsLevel1.Add(_gateObject);
+        _gameObjectsLevel1.Add(_gateLevel1);
         _gameObjectsLevel1.Add(_backButton);
 
         // Level2
+        _gameObjectsLevel2.Add(_player);
+        _gameObjectsLevel2.Add(_gateLevel2);
+       // _gameObjectsLevel2.Add(_backButton);
     }
     protected override void Update(GameTime gameTime)
     {
@@ -172,7 +182,8 @@ public class Game1 : Game
                 for (int i = 0; i < _gameObjectsLevel1.Count; i++)
                 {
                     _gameObjectsLevel1[i].DrawObject(_sb);
-                }
+                    //    _gameObjectsLevel[i].DrawString(_sb);
+                    }
                 break;
             }
         case LevelState.Level2:
@@ -180,6 +191,7 @@ public class Game1 : Game
                 for (int i = 0; i < _gameObjectsLevel2.Count; i++)
                 {
                     _gameObjectsLevel2[i].DrawObject(_sb);
+                  //  _gameObjectsLevel2[i].DrawString(_sb);
                 }
                 break;
             }

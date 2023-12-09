@@ -97,7 +97,6 @@ public class Player : GameObject
     {
         if (pObjectName == "shield" && _items == PlayerItems.Normal)
         {
-            Console.WriteLine(_game1._gameObjectsLevel1.Count);
             _items = PlayerItems.Shield;
         } 
         else if (pObjectName == "weapon" && _items == PlayerItems.Normal)
@@ -107,7 +106,12 @@ public class Player : GameObject
         else if (pObjectName == "gate")
         {
             //_game1.Exit();
-            _game1.SwapScene("menu");
+            _game1.SwapScene("level2");
+            SetPlayerToOriginalPosition();
+        }
+        else if (pObjectName == "gate2")
+        {
+            _game1.SwapScene("level1");
             SetPlayerToOriginalPosition();
         }
         else

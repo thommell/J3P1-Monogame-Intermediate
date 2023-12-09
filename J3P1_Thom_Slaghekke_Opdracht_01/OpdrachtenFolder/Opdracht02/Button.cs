@@ -18,16 +18,46 @@ namespace J3P1_CSharp_Advanced.OpdrachtenFolder.Opdracht02
         protected MouseState _mouseState;
         protected ButtonState _previousMouseClick = Mouse.GetState().LeftButton;
         protected Game1 _game;
-        public Button(Vector2 pPosition, Texture2D pTexture, Rectangle pRectangle, Game1 game) : base(pPosition, pTexture, pRectangle)
+        protected SpriteFont _font;
+        /// <summary>
+        /// Constructor for buttons that need a reference for game1.
+        /// </summary>
+        /// <param name="pPosition"></param>
+        /// <param name="pTexture"></param>
+        /// <param name="pRectangle"></param>
+        /// <param name="pGame"></param>
+        public Button(Vector2 pPosition, Texture2D pTexture, Rectangle pRectangle, Game1 pGame) : base(pPosition, pTexture, pRectangle)
         {
-            _game = game;   
+            _game = pGame;   
         }
+        /// <summary>
+        /// Constructor for a button.
+        /// </summary>
+        /// <param name="pPosition"></param>
+        /// <param name="pTexture"></param>
+        /// <param name="pRectangle"></param>
         public Button(Vector2 pPosition, Texture2D pTexture, Rectangle pRectangle) : base(pPosition, pTexture, pRectangle)
         {
 
         }
+        public Button(Vector2 pPosition, Texture2D pTexture, Rectangle pRectangle, SpriteFont pFont) : base(pPosition, pTexture, pRectangle)
+        {
+            _font = pFont;
+        }
         /// <summary>
-        /// Update object Button on each frame.
+        /// Constructor for a button with a font.
+        /// </summary>
+        /// <param name="pPosition"></param>
+        /// <param name="pTexture"></param>
+        /// <param name="pRectangle"></param>
+        /// <param name="pFont"></param>
+        public Button(Vector2 pPosition, Texture2D pTexture, Rectangle pRectangle, SpriteFont pFont, Game1 pGame) : base(pPosition, pTexture, pRectangle)
+        {
+            _game = pGame;
+            _font = pFont;
+        }
+        /// <summary>
+        /// Update object button on each frame.
         /// </summary>
         /// <param name="pGameTime"></param>
         public override void UpdateObject(GameTime pGameTime)
@@ -55,7 +85,6 @@ namespace J3P1_CSharp_Advanced.OpdrachtenFolder.Opdracht02
         private void UpdateRectangle()
         {
             _rectangle = new Rectangle((int)_position.X, (int)_position.Y, _texture.Width, _texture.Height);
-            Console.WriteLine(_rectangle.X);
         }
         /// <summary>
         /// Handle normal state of button.
@@ -107,7 +136,14 @@ namespace J3P1_CSharp_Advanced.OpdrachtenFolder.Opdracht02
         }
         public override void DrawObject(SpriteBatch pSpriteBatch)
         {
-            base.DrawObject(pSpriteBatch);
+            DrawColors(pSpriteBatch);
+        }
+        /// <summary>
+        /// Draws the colors (that can change) of every button.
+        /// </summary>
+        /// <param name="pSpriteBatch"></param>
+        public void DrawColors(SpriteBatch pSpriteBatch)
+        {
             pSpriteBatch.Draw(_texture, _position, null, _buttonColor, 0f, Vector2.Zero, new Vector2(1, 1), SpriteEffects.None, 0f);
         }
     }
