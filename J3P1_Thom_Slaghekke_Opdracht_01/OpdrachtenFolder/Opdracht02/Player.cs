@@ -1,4 +1,5 @@
 using System;
+using System.Configuration;
 using System.Security.Cryptography.X509Certificates;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
@@ -32,14 +33,14 @@ public class Player : GameObject
         PlayerMovement(pGameTime);
         ClampPlayer(pGameTime, _viewPort);
         //UpdateTexture();
-        UpdateRect();
+        UpdateRectangle(pGameTime);
        // Console.WriteLine(_items);
     }
 
     private void ClampPlayer(GameTime pGameTime, Viewport pViewport)
     {
-        _position = new Vector2(Math.Clamp(_position.X, 0, pViewport.Width - _texture.Width),
-        Math.Clamp(_position.Y, 0, pViewport.Height - _texture.Height));
+        position = new Vector2(Math.Clamp(position.X, 0, pViewport.Width - _texture.Width),
+        Math.Clamp(position.Y, 0, pViewport.Height - _texture.Height));
     }
     private void UpdateTexture()
     {
@@ -62,9 +63,9 @@ public class Player : GameObject
                 break;
         }
     }
-    private void UpdateRect()
+    public override void UpdateRectangle(GameTime pGameTime)
     {
-        _rectangle = new Rectangle((int)_position.X, (int)_position.Y, _texture.Width, _texture.Height);
+        base.UpdateRectangle(pGameTime);
     }
     private void PlayerMovement(GameTime pGameTime)
     {
@@ -90,7 +91,7 @@ public class Player : GameObject
         if (translation != Vector2.Zero)
         {
             translation.Normalize();
-            _position += translation * _speed * (float)pGameTime.ElapsedGameTime.TotalSeconds;
+            position += translation * _speed * (float)pGameTime.ElapsedGameTime.TotalSeconds;
         }
     }
     public void CollidedWith(string pObjectName)
@@ -123,7 +124,7 @@ public class Player : GameObject
     }
     private void SetPlayerToOriginalPosition()
     {
-        _position = new Vector2(_originalPosition.X, _originalPosition.Y);
+        position = new Vector2(_originalPosition.X, _originalPosition.Y);
     }
 
 }

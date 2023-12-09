@@ -33,7 +33,7 @@ namespace J3P1_CSharp_Advanced.OpdrachtenFolder.Opdracht02
         }
         public override void DrawString(SpriteBatch pSpriteBatch)
         {
-            pSpriteBatch.DrawString(_font, _buttonText, new Vector2(_position.X + _textDimensions.X, _position.Y + _textDimensions.Y), Color.White);
+            pSpriteBatch.DrawString(_font, _buttonText, new Vector2(position.X + _textDimensions.X, position.Y + _textDimensions.Y), Color.White);
         }
         /// <summary>
         /// Exits the environment and cancels the build.

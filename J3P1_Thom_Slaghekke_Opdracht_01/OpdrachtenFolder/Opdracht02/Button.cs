@@ -68,7 +68,7 @@ namespace J3P1_CSharp_Advanced.OpdrachtenFolder.Opdracht02
         /// </summary>
         private void UpdateRectangle()
         {
-            _rectangle = new Rectangle((int)_position.X, (int)_position.Y, _texture.Width, _texture.Height);
+            _rectangle = new Rectangle((int)position.X, (int)position.Y, _texture.Width, _texture.Height);
         }
         /// <summary>
         /// Handle normal state of button.
@@ -128,7 +128,7 @@ namespace J3P1_CSharp_Advanced.OpdrachtenFolder.Opdracht02
         /// <param name="pSpriteBatch"></param>
         public void DrawColors(SpriteBatch pSpriteBatch)
         {
-            pSpriteBatch.Draw(_texture, _position, null, _buttonColor, 0f, Vector2.Zero, new Vector2(1, 1), SpriteEffects.None, 0f);
+            pSpriteBatch.Draw(_texture, position, null, _buttonColor, 0f, Vector2.Zero, new Vector2(1, 1), SpriteEffects.None, 0f);
         }
     }
 }

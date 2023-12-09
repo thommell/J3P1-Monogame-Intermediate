@@ -20,7 +20,7 @@ public class Interactable : GameObject
     }
     public void UpdateRectangle()
     {
-        _rectangle = new Rectangle((int)_position.X, (int)_position.Y, _texture.Width, _texture.Height);
+        _rectangle = new Rectangle((int)position.X, (int)position.Y, _texture.Width, _texture.Height);
     }
     private void CollisionCheck()
     {
