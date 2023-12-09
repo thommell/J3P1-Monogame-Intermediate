@@ -86,7 +86,7 @@ public class Game1 : Game
         _gateLevel1 = new Gate(_gateTexture, new Rectangle(0, 0, 0, 0), new Vector2(0 + (_gateTexture.Width / 2), _windowHeight - (_gateTexture.Height / 2)), "gate", _player, _game);
         _playButton = new PlayButton(new Vector2(_windowWidth / 2, _windowHeight / 2), _buttonTextures[1], new Rectangle(0,0,0,0), _game, _font, "PLAY");
         _quitButton = new QuitButton(new Vector2(_windowWidth / 2, _windowHeight / 2 + 100), _buttonTextures[1], new Rectangle(0, 0, 0, 0), _font, "QUIT");
-        _backButton = new BackButton(new Vector2(_windowWidth - (_buttonTextures[1].Width / 2), 0 + _buttonTextures[1].Height - (_buttonTextures[1].Height / 2)), _buttonTextures[1], new Rectangle(0, 0, 0, 0), _game);
+        _backButton = new BackButton(new Vector2(_windowWidth - (_buttonTextures[1].Width / 2), 0 + _buttonTextures[1].Height - (_buttonTextures[1].Height / 2)), _buttonTextures[1], new Rectangle(0, 0, 0, 0), _font, _game, "BACK");
         _gateLevel2 = new Gate(_gateTexture, new Rectangle(0, 0, 0, 0), new Vector2(0 + (_gateTexture.Width / 2), _windowHeight - (_gateTexture.Height / 2)), "gate2", _player, _game);
 
         // Menu

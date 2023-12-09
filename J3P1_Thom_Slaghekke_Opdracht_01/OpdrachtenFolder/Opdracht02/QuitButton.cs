@@ -8,16 +8,12 @@ namespace J3P1_CSharp_Advanced.OpdrachtenFolder.Opdracht02
 {
     public class QuitButton : Button
     {
-        protected string _quitText;
-        protected float _quitTextX;
-        protected float _quitTextY;
         public QuitButton(Vector2 pPosition, Texture2D pTexture, Rectangle pRectangle, SpriteFont pFont, string pString) : base(pPosition, pTexture, pRectangle, pFont)
         {
-            _quitText = pString;
-            _quitTextX = _texture.Width / 2f - _font.MeasureString(_quitText).X / 2;
-            _quitTextY = _texture.Height / 2f - _font.MeasureString(_quitText).Y / 2;
+            _buttonText = pString;
+            _textDimensions.X = _texture.Width / 2f - _font.MeasureString(_buttonText).X / 2;
+            _textDimensions.Y = _texture.Height / 2f - _font.MeasureString(_buttonText).Y / 2;
         }
-
         protected override void StateNormal()
         {
             base.StateNormal();
@@ -37,7 +33,7 @@ namespace J3P1_CSharp_Advanced.OpdrachtenFolder.Opdracht02
         }
         public override void DrawString(SpriteBatch pSpriteBatch)
         {
-            pSpriteBatch.DrawString(_font, _quitText, new Vector2(_position.X + _quitTextX, _position.Y + _quitTextY), Color.White);
+            pSpriteBatch.DrawString(_font, _buttonText, new Vector2(_position.X + _textDimensions.X, _position.Y + _textDimensions.Y), Color.White);
         }
         /// <summary>
         /// Exits the environment and cancels the build.

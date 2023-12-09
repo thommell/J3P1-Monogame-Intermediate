@@ -11,6 +11,7 @@ namespace J3P1_CSharp_Advanced.OpdrachtenFolder.Opdracht02
 {
     public class Button : GameObject
     {
+        //Button
         protected CurrentButtonState _currentButtonState;
         protected LevelState _levelState;
         protected Point _mousePosition;
@@ -18,28 +19,11 @@ namespace J3P1_CSharp_Advanced.OpdrachtenFolder.Opdracht02
         protected MouseState _mouseState;
         protected ButtonState _previousMouseClick = Mouse.GetState().LeftButton;
         protected Game1 _game;
-        protected SpriteFont _font;
-        /// <summary>
-        /// Constructor for buttons that need a reference for game1.
-        /// </summary>
-        /// <param name="pPosition"></param>
-        /// <param name="pTexture"></param>
-        /// <param name="pRectangle"></param>
-        /// <param name="pGame"></param>
-        public Button(Vector2 pPosition, Texture2D pTexture, Rectangle pRectangle, Game1 pGame) : base(pPosition, pTexture, pRectangle)
-        {
-            _game = pGame;   
-        }
-        /// <summary>
-        /// Constructor for a button.
-        /// </summary>
-        /// <param name="pPosition"></param>
-        /// <param name="pTexture"></param>
-        /// <param name="pRectangle"></param>
-        public Button(Vector2 pPosition, Texture2D pTexture, Rectangle pRectangle) : base(pPosition, pTexture, pRectangle)
-        {
 
-        }
+        //Text
+        protected SpriteFont _font;
+        protected string _buttonText;
+        protected Vector2 _textDimensions;
         public Button(Vector2 pPosition, Texture2D pTexture, Rectangle pRectangle, SpriteFont pFont) : base(pPosition, pTexture, pRectangle)
         {
             _font = pFont;
