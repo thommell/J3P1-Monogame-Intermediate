@@ -111,12 +111,7 @@ namespace J3P1_CSharp_Advanced.OpdrachtenFolder.Opdracht02
         /// <param name="pGameTime"></param>
         private void Idle(GameTime pGameTime)
         {
-            _durationToChange -= (float)pGameTime.ElapsedGameTime.TotalSeconds;
-            if (_durationToChange <= 0)
-            {
-                _durationToChange = 0.5f;
-                _currentEnemyState = EnemyState.Patrolling;
-            }
+            EnemyIdling(pGameTime);
         }
         /// <summary>
         /// if enemystate is Chase, this method will run.
@@ -143,6 +138,19 @@ namespace J3P1_CSharp_Advanced.OpdrachtenFolder.Opdracht02
         private void Rest(GameTime pGameTime)
         {
             EnemyResting(pGameTime);
+        }
+        /// <summary>
+        /// Enemy will wait until its allowed to move.
+        /// </summary>
+        /// <param name="pGameTime"></param>
+        private void EnemyIdling(GameTime pGameTime)
+        {
+            _durationToChange -= (float)pGameTime.ElapsedGameTime.TotalSeconds;
+            if (_durationToChange <= 0)
+            {
+                _durationToChange = 0.5f;
+                _currentEnemyState = EnemyState.Patrolling;
+            }
         }
         /// <summary>
         /// Enemy will take its time to rest.
