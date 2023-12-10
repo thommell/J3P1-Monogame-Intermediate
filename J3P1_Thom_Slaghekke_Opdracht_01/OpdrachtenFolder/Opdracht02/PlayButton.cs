@@ -1,4 +1,5 @@
-﻿using Microsoft.Xna.Framework;
+﻿using J3P1_CSharp_Advanced.OpdrachtenFolder.Opdracht03;
+using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
 using System;

@@ -7,7 +7,7 @@ namespace J3P1_CSharp_Advanced.OpdrachtenFolder.Opdracht03
 {
     public class PlayButton : Button
     {
-        public PlayButton(Vector2 pPositon, Texture2D pTexture, Rectangle pRectangle, Game1 pGame, SpriteFont pFont, string pString) : base(pPositon, pTexture, pRectangle, pFont, pGame)
+        public PlayButton(Vector2 pPositon, Texture2D pTexture, Rectangle pRectangle, SceneManager pSceneManager, SpriteFont pFont, string pString) : base(pPositon, pTexture, pRectangle, pFont, pSceneManager)
         {
             _buttonText = pString;
             _textDimensions.X = _texture.Width / 2f - _font.MeasureString(_buttonText).X / 2;
@@ -27,7 +27,7 @@ namespace J3P1_CSharp_Advanced.OpdrachtenFolder.Opdracht03
         }
         protected override void OnClick()
         {
-            _game.SwapScene("level1");
+            _sceneManager.SwapScene(1);
         }
         public override void DrawString(SpriteBatch pSpriteBatch)
         {

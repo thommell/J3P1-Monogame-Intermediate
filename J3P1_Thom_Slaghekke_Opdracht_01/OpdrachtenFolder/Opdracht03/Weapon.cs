@@ -2,7 +2,6 @@
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
-using SharpDX.Direct3D9;
 
 namespace J3P1_CSharp_Advanced.OpdrachtenFolder.Opdracht03
 {
@@ -20,7 +19,7 @@ namespace J3P1_CSharp_Advanced.OpdrachtenFolder.Opdracht03
         public override void OnCollision()
         {
             _player.CollidedWith(_objName);
-            _game1._gameObjectsLevel1.Remove(this);
+            //_game1._gameObjectsLevel1.Remove(this);
         }
     }
 }

@@ -18,7 +18,7 @@ namespace J3P1_CSharp_Advanced.OpdrachtenFolder.Opdracht03
         protected Color _buttonColor;
         protected MouseState _mouseState;
         protected ButtonState _previousMouseClick = Mouse.GetState().LeftButton;
-        protected Game1 _game;
+        protected SceneManager _sceneManager;
 
         //Text
         protected SpriteFont _font;
@@ -35,9 +35,9 @@ namespace J3P1_CSharp_Advanced.OpdrachtenFolder.Opdracht03
         /// <param name="pTexture"></param>
         /// <param name="pRectangle"></param>
         /// <param name="pFont"></param>
-        public Button(Vector2 pPosition, Texture2D pTexture, Rectangle pRectangle, SpriteFont pFont, Game1 pGame) : base(pPosition, pTexture, pRectangle)
+        public Button(Vector2 pPosition, Texture2D pTexture, Rectangle pRectangle, SpriteFont pFont, SceneManager pSceneManager) : base(pPosition, pTexture, pRectangle, pSceneManager)
         {
-            _game = pGame;
+            _sceneManager = pSceneManager;
             _font = pFont;
         }
         /// <summary>

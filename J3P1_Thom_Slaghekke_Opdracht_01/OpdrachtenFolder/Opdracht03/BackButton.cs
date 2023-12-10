@@ -7,7 +7,7 @@ namespace J3P1_CSharp_Advanced.OpdrachtenFolder.Opdracht03
 {
     public class BackButton : Button
     {
-        public BackButton(Vector2 pPosition, Texture2D pTexture, Rectangle pRectangle, SpriteFont pFont, Game1 pGame, string pString) : base(pPosition, pTexture, pRectangle, pFont, pGame)
+        public BackButton(Vector2 pPosition, Texture2D pTexture, Rectangle pRectangle, SpriteFont pFont, SceneManager pSceneManager, string pString) : base(pPosition, pTexture, pRectangle, pFont, pSceneManager)
         {
             _buttonText = pString;
             _textDimensions.X = _texture.Width / 2 - _font.MeasureString(_buttonText).X / 2;
@@ -36,7 +36,7 @@ namespace J3P1_CSharp_Advanced.OpdrachtenFolder.Opdracht03
         }
         protected override void OnClick()
         {
-            _game.SwapScene("menu");
+           // _game.SwapScene("menu");
         }
     }
 }

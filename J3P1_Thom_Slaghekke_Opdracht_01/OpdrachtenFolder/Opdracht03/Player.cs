@@ -106,12 +106,12 @@ public class Player : GameObject
         else if (pObjectName == "gate")
         {
             //_game1.Exit();
-            _game1.SwapScene("level2");
+           // _game1.SwapScene("level2");
             SetPlayerToOriginalPosition();
         }
         else if (pObjectName == "gate2")
         {
-            _game1.SwapScene("level1");
+            //_game1.SwapScene("level1");
             SetPlayerToOriginalPosition();
         }
         else
