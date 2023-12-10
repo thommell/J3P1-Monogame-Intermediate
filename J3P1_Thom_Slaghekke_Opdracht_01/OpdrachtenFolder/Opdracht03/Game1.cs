@@ -57,7 +57,7 @@ namespace J3P1_CSharp_Advanced.OpdrachtenFolder.Opdracht03
         {
             base.Draw(pGameTime);
             _sb.Begin();
-            _sceneManager.Draw(_sb);
+            _scenes[_sceneIndex].DrawScene(_sb);
 
             _sb.End();
         }

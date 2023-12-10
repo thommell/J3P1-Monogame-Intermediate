@@ -34,5 +34,9 @@ namespace J3P1_CSharp_Advanced.OpdrachtenFolder.Opdracht03
             base.UpdateScene(pGameTime);
             System.Console.WriteLine(_objectsInScene.Count);
         }
+        public override void DrawScene(SpriteBatch pSpriteBatch)
+        {
+            base.DrawScene(pSpriteBatch);
+        }
     }
 }
