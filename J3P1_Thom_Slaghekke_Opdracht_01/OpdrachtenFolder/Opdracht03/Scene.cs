@@ -38,15 +38,12 @@ namespace J3P1_CSharp_Advanced.OpdrachtenFolder.Opdracht03
         {
             for (int i = 0; i < _objectsInScene.Count; i++)
             {
-                _objectsInScene[i].DrawObject(pSpriteBatch);
+                _objectsInScene[i].DrawObject(_spriteBatch);
             }
         }
-        public void RemoveObject()
+        public void RemoveObject(GameObject obj)
         {
-            while (_objectsInScene.Count > 0)
-            {
-                _objectsInScene.Remove(_objectsInScene[0]);
-            }
+            _objectsInScene.Remove(obj);
         }
     }
 }

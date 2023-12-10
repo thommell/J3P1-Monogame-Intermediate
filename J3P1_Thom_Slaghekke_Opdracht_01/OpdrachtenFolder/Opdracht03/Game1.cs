@@ -12,7 +12,7 @@ namespace J3P1_CSharp_Advanced.OpdrachtenFolder.Opdracht03
         private GraphicsDeviceManager _graphics;
         private SpriteBatch _sb;
 
-        public int _currentScene = 0;
+        public int _sceneIndex = 0;
 
         private Viewport _viewport;
         private SceneManager _sceneManager;
@@ -50,16 +50,20 @@ namespace J3P1_CSharp_Advanced.OpdrachtenFolder.Opdracht03
         }
         protected override void Update(GameTime pGameTime)
         {
-            _scenes[_currentScene].UpdateScene(pGameTime);
-            Console.WriteLine(_scenes[_currentScene]._objectsInScene.Count);
+            _scenes[_sceneIndex].UpdateScene(pGameTime);
+            Console.WriteLine(_scenes[_sceneIndex]._objectsInScene.Count);
         }
         protected override void Draw(GameTime pGameTime)
         {
             base.Draw(pGameTime);
             _sb.Begin();
-            _scenes[_currentScene].DrawScene(_sb);
+            _sceneManager.Draw(_sb);
 
             _sb.End();
+        }
+        public void RemoveGameObject(GameObject obj)
+        {
+            _scenes[_sceneIndex].RemoveObject(obj); 
         }
     }
 }

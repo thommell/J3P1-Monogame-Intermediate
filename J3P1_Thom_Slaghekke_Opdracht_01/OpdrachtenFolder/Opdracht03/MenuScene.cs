@@ -29,13 +29,5 @@ namespace J3P1_CSharp_Advanced.OpdrachtenFolder.Opdracht03
 
             base.LoadScene(pSceneManager);
         }
-        public override void UpdateScene(GameTime pGameTime)
-        {
-            base.UpdateScene(pGameTime);
-        }
-        public override void DrawScene(SpriteBatch pSpriteBatch)
-        {
-            base.DrawScene(pSpriteBatch);
-        }
     }
 }

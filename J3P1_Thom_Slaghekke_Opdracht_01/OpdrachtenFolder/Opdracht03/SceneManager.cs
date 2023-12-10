@@ -18,8 +18,8 @@ namespace J3P1_CSharp_Advanced.OpdrachtenFolder.Opdracht03
         }
         public void SwapScene(int pInt)
         {
-            _game._currentScene = pInt;
-            _currentScene = _scenes[pInt];
+            _game._sceneIndex = pInt;
+            _currentScene = _scenes[_game._sceneIndex];
         }
         public void Load()
         {

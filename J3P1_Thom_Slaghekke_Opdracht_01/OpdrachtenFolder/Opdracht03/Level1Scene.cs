@@ -32,10 +32,7 @@ namespace J3P1_CSharp_Advanced.OpdrachtenFolder.Opdracht03
         public override void UpdateScene(GameTime pGameTime)
         {
             base.UpdateScene(pGameTime);
-        }
-        public override void DrawScene(SpriteBatch pSpriteBatch)
-        {
-            base.DrawScene(pSpriteBatch);
+            System.Console.WriteLine(_objectsInScene.Count);
         }
     }
 }
