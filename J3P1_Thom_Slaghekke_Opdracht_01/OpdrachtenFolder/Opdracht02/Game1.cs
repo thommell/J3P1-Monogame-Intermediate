@@ -187,8 +187,7 @@ public class Game1 : Game
                 for (int i = 0; i < _gameObjectsLevel1.Count; i++)
                 {
                     _gameObjectsLevel1[i].DrawObject(_sb);
-                    //    _gameObjectsLevel[i].DrawString(_sb);
-                    }
+                }
                 break;
             }
         case LevelState.Level2:

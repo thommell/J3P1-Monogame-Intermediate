@@ -7,6 +7,7 @@ namespace J3P1_CSharp_Advanced.OpdrachtenFolder.Opdracht02
         Patrolling,
         Idling,
         Chasing,
-        Evading
+        Evading,
+        Resting
     }
 }
