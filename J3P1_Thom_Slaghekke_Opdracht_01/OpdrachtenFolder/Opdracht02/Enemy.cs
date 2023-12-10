@@ -237,7 +237,6 @@ namespace J3P1_CSharp_Advanced.OpdrachtenFolder.Opdracht02
                 _player.KillPlayer();
             }
         }
-
         public override void DrawObject(SpriteBatch pSpriteBatch)
         {
             base.DrawObject(pSpriteBatch);
