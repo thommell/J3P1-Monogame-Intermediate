@@ -11,22 +11,26 @@ namespace J3P1_CSharp_Advanced.OpdrachtenFolder.Opdracht02
 {
     public class Enemy : GameObject
     {
-        protected float _speed;
-        protected Vector2 _direction;
+        private GraphicsDevice _device;
+
         protected Player _player;
+
+        protected Vector2 _direction;
+
         protected Rectangle _targetRectangle;
+
         protected Texture2D _hitboxColor;
+
         protected int _chasingSize;
+        private int index = 0;
 
         protected float _stamina = 4f;
         protected float _restTime = 0f;
-
-        private int index = 0;
         protected float _durationToChange = 0.5f;
+        protected float _speed;
 
-        public EnemyState _currentEnemyState = EnemyState.Idling;
 
-        private GraphicsDevice _device;
+        public EnemyState currentEnemyState = EnemyState.Idling;
         private List<Waypoint> _waypoints;
         public Enemy(Vector2 pPosition, Texture2D pTexture, Rectangle pRectangle, Player pPlayer, GraphicsDevice pDevice, float pSpeed, int pSize, List<Waypoint> pListOfWaypoints) : base(pPosition, pTexture, pRectangle)
         {
@@ -47,7 +51,7 @@ namespace J3P1_CSharp_Advanced.OpdrachtenFolder.Opdracht02
         {
             CheckState(pGameTime);
             UpdateRectangle(pGameTime);
-            Console.WriteLine(_currentEnemyState);
+            Console.WriteLine(currentEnemyState);
         }
         /// <summary>
         /// Updates all the rectangles from the object.
@@ -76,7 +80,7 @@ namespace J3P1_CSharp_Advanced.OpdrachtenFolder.Opdracht02
         /// <param name="pGameTime"></param>
         private void CheckState(GameTime pGameTime)
         {
-            switch (_currentEnemyState)
+            switch (currentEnemyState)
             {
                 case EnemyState.Patrolling:
                     Patrol(pGameTime);
@@ -149,7 +153,7 @@ namespace J3P1_CSharp_Advanced.OpdrachtenFolder.Opdracht02
             if (_durationToChange <= 0)
             {
                 _durationToChange = 0.5f;
-                _currentEnemyState = EnemyState.Patrolling;
+                currentEnemyState = EnemyState.Patrolling;
             }
         }
         /// <summary>
@@ -161,7 +165,7 @@ namespace J3P1_CSharp_Advanced.OpdrachtenFolder.Opdracht02
             _restTime += (float)pGameTime.ElapsedGameTime.TotalSeconds;
             if (_restTime >= 2f)
             {
-                _currentEnemyState = EnemyState.Patrolling;
+                currentEnemyState = EnemyState.Patrolling;
                 _restTime = 0;
             }
         }
@@ -190,7 +194,7 @@ namespace J3P1_CSharp_Advanced.OpdrachtenFolder.Opdracht02
             _stamina -= (float)pGameTime.ElapsedGameTime.TotalSeconds;
             if (_stamina < 0)
             {
-                _currentEnemyState = EnemyState.Resting;
+                currentEnemyState = EnemyState.Resting;
                 _stamina = 4f;
             }
         }
@@ -222,15 +226,15 @@ namespace J3P1_CSharp_Advanced.OpdrachtenFolder.Opdracht02
         {
             if (_player._rectangle.Intersects(_targetRectangle) && (_player.items != PlayerItems.WeaponAndShield))
             {
-                _currentEnemyState = EnemyState.Chasing;
+                currentEnemyState = EnemyState.Chasing;
             }
             if (_player._rectangle.Intersects(_targetRectangle) && (_player.items == PlayerItems.WeaponAndShield))
             {
-                _currentEnemyState = EnemyState.Evading;
+                currentEnemyState = EnemyState.Evading;
             }
             if (!_player._rectangle.Intersects(_targetRectangle))
             {
-                _currentEnemyState = EnemyState.Patrolling;
+                currentEnemyState = EnemyState.Patrolling;
             }
             if (_player._rectangle.Intersects(_rectangle))
             {
