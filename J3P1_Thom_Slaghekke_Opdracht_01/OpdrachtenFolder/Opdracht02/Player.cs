@@ -11,14 +11,14 @@ public enum PlayerItems
     Normal,
     Weapon,
     Shield,
-    SwordAndShield
+    WeaponAndShield
 }
 public class Player : GameObject
 {
     private Game1 _game1;
     private readonly float _speed = 350f;
     private readonly Viewport _viewPort;
-    protected PlayerItems _items = PlayerItems.Normal;
+    public PlayerItems items = PlayerItems.Normal;
     private Texture2D[] _playerTextures;
     private Vector2 _originalPosition;
     public Player(Vector2 pPosition, Texture2D pTexture, Rectangle pRectangle, Viewport pViewPort, Texture2D[] pPlayerTextures, Game1 pGame) : base(pPosition, pTexture, pRectangle)
@@ -44,7 +44,7 @@ public class Player : GameObject
     }
     private void UpdateTexture()
     {
-        switch (_items)
+        switch (items)
         {
             case PlayerItems.Normal:
                 _texture = _playerTextures[0];
@@ -55,7 +55,7 @@ public class Player : GameObject
             case PlayerItems.Weapon:
                 _texture = _playerTextures[2];
                 break;
-            case PlayerItems.SwordAndShield:
+            case PlayerItems.WeaponAndShield:
                 _texture = _playerTextures[3];
                 break;
             default:
@@ -96,13 +96,13 @@ public class Player : GameObject
     }
     public void CollidedWith(string pObjectName)
     {
-        if (pObjectName == "shield" && _items == PlayerItems.Normal)
+        if (pObjectName == "shield" && items == PlayerItems.Normal)
         {
-            _items = PlayerItems.Shield;
+            items = PlayerItems.Shield;
         } 
-        else if (pObjectName == "weapon" && _items == PlayerItems.Normal)
+        else if (pObjectName == "weapon" && items == PlayerItems.Normal)
         {
-            _items = PlayerItems.Weapon;
+            items = PlayerItems.Weapon;
         }
         else if (pObjectName == "gate")
         {
@@ -117,14 +117,17 @@ public class Player : GameObject
         }
         else
         {
-            _items = PlayerItems.SwordAndShield;
+            items = PlayerItems.WeaponAndShield;
         }
-
         UpdateTexture();
     }
     private void SetPlayerToOriginalPosition()
     {
         position = new Vector2(_originalPosition.X, _originalPosition.Y);
+    }
+    public void KillPlayer()
+    {
+        Environment.Exit(0);
     }
 
 }
