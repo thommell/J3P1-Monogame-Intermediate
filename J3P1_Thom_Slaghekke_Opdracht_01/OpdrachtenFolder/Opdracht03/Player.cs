@@ -5,7 +5,7 @@ using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
 
-namespace J3P1_CSharp_Advanced.OpdrachtenFolder.Opdracht02;
+namespace J3P1_CSharp_Advanced.OpdrachtenFolder.Opdracht03;
 public enum PlayerItems
 {
     Normal,
