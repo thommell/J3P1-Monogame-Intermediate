@@ -167,7 +167,7 @@ namespace J3P1_CSharp_Advanced.OpdrachtenFolder.Opdracht02
             {
                 if (Vector2.Distance(position, _waypoints[index].position) <= 3f)
                 {
-                    index = (index + 1) % _waypoints.Count; // if count exceeds the waypoints itll reset and start over
+                    index = (index + 1) % _waypoints.Count; // if count exceeds the waypoints itll reset back to 0 and restart.
                 }
                 Vector2 waypointDirection = Vector2.Normalize(_waypoints[index].position - position);
                 position += waypointDirection * (_speed / 2) * (float)pGameTime.ElapsedGameTime.TotalSeconds;
